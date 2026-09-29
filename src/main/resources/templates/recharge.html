@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#241b36"><title>Recharge &middot; Launchpad</title>
+  <link rel="icon" href="/assets/launchpad-logo.png">
+  <link rel="stylesheet" href="/assets/catalog.css"><link rel="stylesheet" href="/assets/user-shell.css">
+  <link rel="stylesheet" href="/assets/recharge.css">
+  <script type="module" src="/assets/user-shell.js"></script>
+  <script type="module" src="/assets/recharge.js"></script>
+<link rel="stylesheet" href="/assets/site-footer.css"><link rel="stylesheet" href="/assets/app-theme.css"></head>
+<body class="lp-app">
+<header th:replace="~{fragments/navigation :: navigation}"></header>
+<main id="main-content" tabindex="-1" class="catalog-main recharge-main">
+  <a href="/dashboard" class="back-home">&larr; Back to home</a>
+  <div class="page-heading"><div><p class="eyebrow">YOUR WALLET</p><h1>Recharge your wallet.</h1><p class="muted">Add money securely and keep your balance ready.</p></div></div>
+  <div id="message" class="message" role="status" aria-live="polite" hidden></div>
+  <div class="recharge-layout">
+    <section class="balance-card" aria-labelledby="balance-title">
+      <p id="balance-title">Available balance</p><strong id="wallet-balance" aria-live="polite">&mdash;</strong>
+      <span>Indian Rupees &middot; INR</span>
+      <p class="balance-note">Your balance updates after your payment is securely confirmed.</p>
+      <button id="refresh-wallet" type="button" class="balance-refresh">Refresh balance</button>
+    </section>
+    <section class="recharge-card" aria-labelledby="recharge-title">
+      <h2 id="recharge-title">Add money</h2><p class="muted">Choose an amount or enter your own.</p>
+      <form id="recharge-form">
+        <fieldset id="recharge-fields" disabled>
+          <legend class="visually-hidden">Recharge amount</legend>
+          <div class="amount-options" aria-label="Suggested amounts">
+            <button type="button" data-amount="100" aria-pressed="false">&#8377;100</button>
+            <button type="button" data-amount="200" aria-pressed="false">&#8377;200</button>
+            <button type="button" data-amount="500" aria-pressed="true">&#8377;500</button>
+            <button type="button" data-amount="1000" aria-pressed="false">&#8377;1,000</button>
+            <button type="button" data-amount="2000" aria-pressed="false">&#8377;2,000</button>
+            <button type="button" data-amount="5000" aria-pressed="false">&#8377;5,000</button>
+          </div>
+          <label for="recharge-amount">Amount in rupees</label>
+          <div class="amount-input"><span aria-hidden="true">&#8377;</span><input id="recharge-amount" name="amount" type="number" inputmode="decimal" min="1" max="100000" step="0.01" value="500" required aria-describedby="amount-help"></div>
+          <p id="amount-help" class="muted">Loading recharge settings...</p>
+          <button id="pay-now" class="primary" type="submit">Add money &rarr;</button>
+        </fieldset>
+      </form>
+      <button id="retry-verification" class="primary" type="button" hidden>Retry payment verification</button>
+      <p class="checkout-note">Secure checkout by Razorpay. UPI, cards and other available payment methods.</p>
+    </section>
+  </div>
+  <section class="recharge-card recharge-history" aria-labelledby="history-title">
+    <h2 id="history-title">Recent recharges</h2><p class="muted">Your latest 50 completed wallet credits.</p>
+    <p id="history-empty">Loading transactions...</p>
+    <div class="history-scroll"><table id="recharge-history" hidden><thead><tr><th>Date</th><th>Payment reference</th><th>Amount</th><th>Status</th></tr></thead><tbody id="history-rows"></tbody></table></div>
+  </section>
+</main>
+<footer th:replace="~{fragments/footer :: footer}"></footer></body></html>

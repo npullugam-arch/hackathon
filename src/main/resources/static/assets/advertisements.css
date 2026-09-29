@@ -1,0 +1,16 @@
+.ad-modal{width:min(700px,calc(100% - 30px));max-height:90svh;padding:0;border:0;border-radius:14px;background:#fff;color:#263e34;overflow:auto}.ad-modal::backdrop{background:#102a25b3;backdrop-filter:blur(3px)}.ad-modal header{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:15px 20px}.ad-modal h2{font-size:15px;margin:0}.ad-modal .icon-button{border:0;border-radius:50%;background:#e8ede2;color:#263e34;font-size:25px;cursor:pointer;width:38px;height:38px;flex-shrink:0}.ad-modal img{display:block;max-height:70svh;object-fit:contain;width:100%;background:#f0f4ea}.ad-modal .ad-notice{padding:20px;color:#7a827b;font-size:13px}
+.ad-modal h2{min-width:0;overflow-wrap:anywhere}
+.ad-modal{width:min(720px,calc(100% - 28px));max-height:90svh;padding:0;border:1px solid #ffffff55;border-radius:22px;background:#fff;color:#20243a;overflow:hidden;box-shadow:0 24px 90px #05071199,0 0 0 1px #d7b36b44;animation:adIn .32s cubic-bezier(.2,.75,.25,1) both}
+.ad-modal::backdrop{background:#090b16b8;backdrop-filter:blur(7px)}
+.ad-modal header{position:relative;z-index:2;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:18px 22px;border-bottom:1px solid #ecebf1;background:linear-gradient(180deg,#fff,#fafafe)}
+.ad-modal h2{font-family:"Avenir Next","Segoe UI",sans-serif;font-size:19px;font-weight:750;letter-spacing:-.3px;margin:0;color:#24263d}
+.ad-modal .icon-button{display:grid;place-items:center;border:1px solid #d9dbea;border-radius:50%;background:#fff;color:#3b3d55;width:42px;height:42px;padding:0;cursor:pointer;transition:transform .2s,background .2s,color .2s,box-shadow .2s}
+.ad-modal .icon-button svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round}
+.ad-modal .icon-button:hover,.ad-modal .icon-button:focus-visible{transform:rotate(90deg) scale(1.06);background:#29263f;color:#fff;box-shadow:0 6px 18px #29263f35}
+.ad-modal .ad-media{position:relative;overflow:hidden;background:#f3f4f8}
+.ad-modal .ad-media::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(110deg,transparent 35%,#fff8 49%,transparent 63%);transform:translateX(-120%);animation:adShine 4.8s ease-in-out infinite}
+.ad-modal img{display:block;width:100%;max-height:70svh;object-fit:contain;background:#f3f4f8}
+.ad-modal .ad-notice{padding:18px 22px;margin:0;color:#6d7085;font-size:13px;line-height:1.7}
+@keyframes adIn{from{opacity:0;transform:scale(.96) translateY(10px)}to{opacity:1;transform:scale(1) translateY(0)}}
+@keyframes adShine{0%,48%{transform:translateX(-120%)}72%,100%{transform:translateX(120%)}}
+@media(max-width:600px){.ad-modal{width:calc(100% - 20px);border-radius:17px}.ad-modal header{padding:14px 16px}.ad-modal h2{font-size:16px}.ad-modal .icon-button{width:44px;height:44px}.ad-modal img{max-height:64svh}}

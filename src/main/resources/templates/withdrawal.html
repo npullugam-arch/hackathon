@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#241b36"><title>Withdraw · Launchpad</title>
+<link rel="icon" href="/assets/launchpad-logo.png"><link rel="stylesheet" href="/assets/catalog.css">
+<link rel="stylesheet" href="/assets/user-shell.css"><link rel="stylesheet" href="/assets/withdrawal.css">
+<script type="module" src="/assets/user-shell.js"></script><script type="module" src="/assets/withdrawal.js"></script>
+<link rel="stylesheet" href="/assets/site-footer.css"><link rel="stylesheet" href="/assets/app-theme.css"></head><body class="lp-app"><header th:replace="~{fragments/navigation :: navigation}"></header>
+<main id="main-content" tabindex="-1" class="catalog-main withdraw-main">
+<a href="/dashboard" class="back-home">&larr; Back to home</a>
+<div class="page-heading"><div><p class="eyebrow">YOUR WINNING CASH</p><h1>Withdraw your earnings.</h1><p class="muted">A clear view of your earnings, bank accounts and withdrawals.</p></div><button id="withdraw-refresh" class="button secondary" type="button">Refresh</button></div>
+<div id="message" class="message" role="status" aria-live="polite" hidden></div>
+<p id="withdraw-loading" role="status">Loading your withdrawal dashboard…</p>
+<section class="withdraw-balances" aria-label="Balances">
+<article class="withdraw-panel"><p>Available Recharge Balance</p><strong id="withdraw-recharge">—</strong><p class="muted">Deposited principal · not withdrawable</p></article>
+<article class="withdraw-panel"><p>Total Winning Cash</p><strong id="withdraw-earned">—</strong><p class="muted">Eligible Winning Cash, including processing reservations</p></article>
+<article class="withdraw-panel withdraw-available"><p>Available to withdraw</p><strong id="withdraw-available">—</strong><p id="withdraw-reserved">Loading reserved amount…</p></article>
+</section>
+<p class="withdraw-notice">Only eligible Winning Cash can be withdrawn. Recharge money is never included. Processing withdrawals reserve your earnings immediately; failed or rejected requests return that reserved amount to Winning Cash.</p>
+<div class="withdraw-layout">
+<section class="withdraw-panel"><div class="section-heading"><h2>Your bank accounts</h2><button id="add-bank" class="button secondary" type="button" disabled>Add Bank Account</button></div><p id="bank-config" class="muted" hidden>Bank setup is temporarily unavailable. Please contact support.</p><p id="banks-empty">Loading bank accounts…</p><div id="bank-cards" class="bank-cards"></div></section>
+<section class="withdraw-panel"><h2>Request a withdrawal</h2><p id="withdraw-minimum" class="muted">Loading withdrawal minimum…</p>
+<div id="pending-withdrawal" class="withdraw-notice" hidden><p>A previous request needs confirmation. Retry it to recover the same withdrawal without reserving money twice.</p><button id="retry-withdrawal" class="button primary" type="button">Recover previous request</button></div>
+<form id="withdraw-form"><fieldset id="withdraw-fields" disabled><legend class="visually-hidden">Withdrawal details</legend>
+<label for="withdraw-bank">Bank account</label><select id="withdraw-bank" required><option value="">Select a bank account</option></select>
+<label for="withdraw-amount">Amount in rupees</label><input id="withdraw-amount" name="amount" type="number" inputmode="decimal" min="0.01" step="0.01" max="9999999999.99" required>
+<p id="withdraw-remaining" aria-live="polite">Remaining Winning Cash: —</p><button class="button primary" type="submit">Review withdrawal &rarr;</button>
+</fieldset></form></section></div>
+<section class="withdraw-panel withdraw-history"><div class="section-heading"><div><h2>Withdrawal history</h2><p class="muted">Track processing, completed and refunded requests.</p></div></div>
+<p id="withdraw-history-empty">Loading history…</p><div class="withdraw-scroll"><table><thead><tr><th>Amount / request</th><th>Bank account</th><th>Requested</th><th>Status</th><th>Reference / remark</th><th>Processed</th></tr></thead><tbody id="withdraw-history"></tbody></table></div>
+<div class="withdraw-pagination"><button id="withdraw-previous" class="button secondary" type="button" disabled>Previous</button><span id="withdraw-page" aria-live="polite"></span><button id="withdraw-next" class="button secondary" type="button" disabled>Next</button></div></section>
+</main>
+<dialog id="bank-dialog" class="editor-dialog compact"><form id="bank-form"><div class="dialog-heading"><h2>Add Bank Account</h2><button type="button" class="icon-button" data-close="bank-dialog" aria-label="Close bank form">×</button></div>
+<p id="bank-error" class="message" role="alert" hidden></p><fieldset id="bank-fields"><legend class="visually-hidden">Bank details</legend>
+<label for="bank-search">Find your bank</label><input id="bank-search" type="search" placeholder="Search bank names" autocomplete="off">
+<label for="bank-code">Select bank</label><select id="bank-code" name="bankCode" required><option value="">Select bank</option></select>
+<label for="bank-holder">Account holder name</label><input id="bank-holder" name="holderName" maxlength="160" required autocomplete="name">
+<label for="bank-number">Account number</label><input id="bank-number" name="accountNumber" inputmode="numeric" pattern="[0-9]{9,18}" minlength="9" maxlength="18" required autocomplete="off">
+<label for="bank-confirm-number">Confirm account number</label><input id="bank-confirm-number" name="confirmAccountNumber" inputmode="numeric" pattern="[0-9]{9,18}" minlength="9" maxlength="18" required autocomplete="off">
+<label for="bank-ifsc">IFSC code</label><input id="bank-ifsc" name="ifsc" pattern="[A-Z]{4}0[A-Z0-9]{6}" minlength="11" maxlength="11" required autocomplete="off">
+<label for="bank-nickname">Nickname</label><input id="bank-nickname" name="nickname" maxlength="60" required placeholder="For example, salary account">
+<p class="muted">Check these details against your bank records. Saving an account does not verify ownership with the bank.</p>
+<div class="dialog-actions"><button type="button" class="button secondary" data-close="bank-dialog">Cancel</button><button type="submit" class="button primary">Save bank account</button></div></fieldset></form></dialog>
+<dialog id="withdraw-confirm" class="editor-dialog compact"><h2>Confirm your withdrawal</h2><dl id="withdraw-confirm-details" class="withdraw-details"></dl><p class="muted">The amount will be reserved while your request is processed. Bank transfer details are reviewed by an administrator.</p><p id="confirm-error" class="message" role="alert" hidden></p><div class="dialog-actions"><button id="cancel-withdraw" type="button" class="button secondary">Go back</button><button id="confirm-withdraw" type="button" class="button primary">Confirm withdrawal</button></div></dialog>
+<footer th:replace="~{fragments/footer :: footer}"></footer></body></html>

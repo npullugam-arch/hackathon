@@ -1,0 +1,25 @@
+<section id="withdrawals-section" th:fragment="withdrawals" hidden>
+<div class="section-heading"><div><h2>Withdrawals</h2><p class="muted">Review Winning Cash requests and record bank transfer outcomes.</p></div><button id="admin-withdraw-refresh" class="button secondary" type="button">Refresh</button></div>
+<p id="admin-withdraw-error" class="message" role="alert" hidden></p>
+<div class="withdraw-totals" id="admin-withdraw-totals" aria-live="polite"></div><form id="admin-withdraw-filters" class="withdraw-panel withdraw-admin-filters">
+<div><label for="aw-status">Status</label><select id="aw-status" name="status"><option value="">All statuses</option><option>PROCESSING</option><option>SUCCESSFUL</option><option>FAILED</option><option>CANCELLED</option><option>REFUNDED</option></select></div>
+<div><label for="aw-from">From date (UTC)</label><input id="aw-from" name="from" type="date" min="2000-01-01" max="2100-12-31"></div>
+<div><label for="aw-to">To date (UTC)</label><input id="aw-to" name="to" type="date" min="2000-01-01" max="2100-12-31"></div>
+<div><label for="aw-user">User, UID, email or phone</label><input id="aw-user" name="user" maxlength="128" type="search"></div>
+<div><label for="aw-id">Withdrawal ID</label><input id="aw-id" name="withdrawalId" pattern="[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}"></div>
+<div><label for="aw-min">Minimum amount (?)</label><input id="aw-min" name="minAmount" type="number" min="0" step="0.01"></div><div><label for="aw-max">Maximum amount (?)</label><input id="aw-max" name="maxAmount" type="number" min="0" step="0.01"></div><div class="dialog-actions"><button class="button primary" type="submit">Apply filters</button><button class="button secondary" type="reset">Reset</button></div>
+</form><p id="admin-withdraw-loading" role="status">Choose this section to load withdrawals.</p>
+<div class="withdraw-scroll"><table><thead><tr><th>Request</th><th>User</th><th>Amount</th><th>Bank / holder / IFSC</th><th>Requested</th><th>Status</th><th>Reference / remark</th><th>Processed</th></tr></thead><tbody id="admin-withdraw-rows"></tbody></table></div>
+<div class="withdraw-pagination"><button id="admin-withdraw-previous" class="button secondary" type="button" disabled>Previous</button><span id="admin-withdraw-page"></span><button id="admin-withdraw-next" class="button secondary" type="button" disabled>Next</button></div>
+<dialog id="admin-withdrawal-dialog" class="editor-dialog"><div class="dialog-heading"><h2>Withdrawal details</h2><button id="aw-close" class="icon-button" type="button" aria-label="Close withdrawal details">×</button></div>
+<p id="aw-notice" class="message success" role="status" hidden></p><p id="aw-error" class="message" role="alert" hidden></p><dl id="aw-details" class="withdraw-details"></dl>
+<div id="aw-processing"><p class="withdraw-notice">Use your bank's transfer process to pay this request. Mark Successful only after confirming the transfer succeeded. A failed or rejected request refunds the reservation immediately; confirm that no transfer succeeded before refunding.</p>
+<button id="aw-reveal" class="button secondary" type="button">View account number for transfer</button><p id="aw-sensitive" class="withdraw-sensitive" hidden></p>
+<form id="aw-action-form" class="withdraw-admin-actions"><fieldset id="aw-action-fields"><legend>Record processing outcome</legend>
+<label for="aw-action">Action</label><select id="aw-action" name="status"><option value="PROCESSING">Mark as processing</option><option value="SUCCESSFUL">Mark as successful</option><option value="ERROR">Failed / error — refund Winning Cash</option><option value="CANCELLED">Cancelled / refunded — refund Winning Cash</option></select>
+<label for="aw-reference">Bank transfer reference (required for completion)</label><input id="aw-reference" name="referenceId" maxlength="120" pattern="[A-Za-z0-9][A-Za-z0-9._/\-]{2,119}">
+<label for="aw-reason">Failure / rejection reason (visible to user)</label><textarea id="aw-reason" name="failureReason" minlength="10" placeholder="Technical issue during payment processing" maxlength="500" rows="2"></textarea>
+<label for="aw-remark">Admin remark (visible to user)</label><textarea id="aw-remark" name="adminRemark" maxlength="500" rows="2"></textarea>
+<label><input id="aw-acknowledge" type="checkbox" required> I checked the bank transfer outcome and confirm this action.</label>
+<button class="button primary" type="submit">Save outcome</button></fieldset></form></div></dialog>
+</section>

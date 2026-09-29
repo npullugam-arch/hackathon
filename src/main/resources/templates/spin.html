@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#241b36"><title>Spin &amp; Earn · Launchpad</title>
+<link rel="icon" href="/assets/launchpad-logo.png"><link rel="stylesheet" href="/assets/catalog.css"><link rel="stylesheet" href="/assets/user-shell.css"><link rel="stylesheet" href="/assets/spin.css">
+<script type="module" src="/assets/user-shell.js"></script><script type="module" src="/assets/spin.js"></script>
+<link rel="stylesheet" href="/assets/site-footer.css"><link rel="stylesheet" href="/assets/app-theme.css"></head><body class="lp-app"><header th:replace="~{fragments/navigation :: navigation}"></header>
+<main id="main-content" tabindex="-1" class="catalog-main spin-main"><a class="back-home" href="/dashboard">&larr; Back to home</a>
+<div class="page-heading"><div><p class="eyebrow">A LITTLE SPIN. A DAILY REWARD.</p><h1>Spin &amp; Earn</h1><p class="muted">One free spin each day. Your reward goes straight to Winning Cash.</p></div><span class="spin-pill">Resets at midnight IST</span></div>
+<div id="message" class="message" role="status" aria-live="polite" hidden></div>
+<div class="spin-layout"><section class="spin-stage" aria-labelledby="wheel-heading"><div class="spin-stage-heading"><h2 id="wheel-heading">Your daily chance to win</h2><span id="spin-status" class="spin-status" role="status">Loading…</span></div>
+<div class="spin-wheel-shell"><div class="spin-pointer" aria-hidden="true"></div><svg id="spin-wheel" viewBox="0 0 400 400" role="img" aria-labelledby="spin-wheel-title"><title id="spin-wheel-title">Daily reward wheel. Loading available prizes.</title><g id="spin-segments"></g></svg><div class="spin-hub" aria-hidden="true"><span>DAILY</span><strong>SPIN</strong><span>✦</span></div></div>
+<p id="spin-wheel-note" class="spin-wheel-note">Checking today's prizes and eligibility…</p><button id="spin-button" class="button primary" type="button" disabled>Loading eligibility…</button><p class="spin-fineprint">Every displayed prize can be won. Wheel segments are illustrative; prize probabilities differ.</p>
+</section>
+<aside class="spin-sidebar"><section class="spin-panel spin-balance"><p>Available Withdrawable / Winning Cash</p><strong id="spin-balance">—</strong><span>Your credited rewards are available to withdraw.</span><a href="/features/withdrawal">View Winning Cash &amp; withdrawals <span aria-hidden="true">↗</span></a></section>
+<section class="spin-panel spin-timing"><div class="spin-section-title"><span class="spin-clock" aria-hidden="true">◷</span><h2>Next Spin Available In</h2></div><strong id="spin-countdown" role="timer" aria-live="off">—</strong><p id="spin-reset-note">Daily reset: 12:00 AM Asia/Kolkata (IST).</p><button id="spin-refresh" class="spin-text-button" type="button">Refresh eligibility</button></section>
+<section id="spin-result" class="spin-panel spin-result" aria-live="polite" hidden><span class="spin-pill">Reward credited</span><h2 id="spin-won"></h2><p id="spin-result-note"></p><dl><dt>Transaction ID</dt><dd id="spin-transaction"></dd><dt>Awarded at (IST)</dt><dd id="spin-awarded-at"></dd></dl></section>
+<section class="spin-panel spin-prizes"><h2>Real rewards. Clear odds.</h2><p>Smaller rewards are more likely. These are the current configured chances.</p><ul id="spin-prizes" aria-label="Available prizes and probabilities"></ul></section>
+</aside></div>
+<section class="spin-panel spin-history" aria-labelledby="spin-history-title"><div class="section-heading"><div><h2 id="spin-history-title">Your reward history</h2><p class="muted">Your latest 20 spins. Each reward has a permanent transaction record.</p></div><span class="spin-pill">Credited to Winning Cash</span></div><p id="spin-history-empty">Loading your rewards…</p><div class="spin-history-scroll"><table><thead><tr><th scope="col">Reward</th><th scope="col">Spin date (IST)</th><th scope="col">Awarded at (IST)</th><th scope="col">Transaction ID</th></tr></thead><tbody id="spin-history"></tbody></table></div></section>
+<p class="spin-footer-note">One spin per account per IST calendar day, across all devices and tabs. Refreshing never creates another reward. No purchase is required to spin.</p>
+<noscript><p class="message">Enable JavaScript to use Daily Spin.</p></noscript>
+</main><footer th:replace="~{fragments/footer :: footer}"></footer></body></html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#241b36"><title>Product Profit Calculator · Launchpad</title>
+<link rel="icon" href="/assets/launchpad-logo.png"><link rel="stylesheet" href="/assets/catalog.css">
+<link rel="stylesheet" href="/assets/user-shell.css"><link rel="stylesheet" href="/assets/profit-calculator.css">
+<script type="module" src="/assets/user-shell.js"></script><script type="module" src="/assets/profit-calculator.js"></script>
+<link rel="stylesheet" href="/assets/site-footer.css"><link rel="stylesheet" href="/assets/app-theme.css"></head><body class="lp-app"><header th:replace="~{fragments/navigation :: navigation}"></header>
+<main id="main-content" tabindex="-1" class="catalog-main calculator-main">
+<a class="back-home" href="/dashboard">&larr; Back to home</a>
+<div class="page-heading"><div><p class="eyebrow">PLAN WITH PERSPECTIVE</p><h1>Product Profit Calculator</h1><p class="muted">Explore the income range. Understand the cost. See the potential downside.</p></div><span class="calc-label">Scenario estimates</span></div>
+<div class="calc-layout">
+<section class="calc-panel calc-inputs" aria-labelledby="inputs-title">
+<div class="calc-section-title"><span class="calc-step" aria-hidden="true">01</span><div><h2 id="inputs-title">Your assumptions</h2><p>Enter product details to calculate instantly.</p></div></div>
+<form id="profit-form" novalidate autocomplete="off">
+<label for="calc-price">Product purchase price <span>(₹)</span></label><input id="calc-price" name="price" type="text" inputmode="decimal" maxlength="18" placeholder="e.g. 1,000 → enter 1000" aria-describedby="price-error" required><p id="price-error" class="calc-error" hidden></p>
+<div class="calc-income-inputs"><div><label for="calc-minimum">Minimum daily income <span>(₹)</span></label><input id="calc-minimum" name="minimum" type="text" inputmode="decimal" maxlength="18" placeholder="e.g. 20" aria-describedby="minimum-error" required><p id="minimum-error" class="calc-error" hidden></p></div>
+<div><label for="calc-maximum">Maximum daily income <span>(₹)</span></label><input id="calc-maximum" name="maximum" type="text" inputmode="decimal" maxlength="18" placeholder="e.g. 40" aria-describedby="maximum-error" required><p id="maximum-error" class="calc-error" hidden></p></div></div>
+<label for="calc-days">Product duration <span>(days)</span></label><input id="calc-days" name="days" type="text" inputmode="numeric" maxlength="8" placeholder="e.g. 30" aria-describedby="days-error" required><p id="days-error" class="calc-error" hidden></p>
+<div class="calc-form-actions"><button class="button secondary" type="reset">Reset</button><button id="calc-example" class="calc-text-button" type="button">Try an example &rarr;</button></div>
+</form>
+<div class="calc-assumptions"><h3>How the estimate works</h3><p>Daily income is assumed to continue for every day of the duration. The average is the midpoint of your range, not a probability-weighted forecast.</p><p>Purchase cost is subtracted once. Fees, taxes, reinvestment and resale value are excluded. Totals use unrounded values; displayed amounts are rounded to two decimals.</p></div>
+</section>
+<div class="calc-output">
+<p id="calc-announcement" class="visually-hidden" role="status" aria-live="polite" aria-atomic="true"></p>
+<section id="calc-empty" class="calc-panel calc-empty" aria-labelledby="empty-title"><span class="calc-empty-symbol" aria-hidden="true">₹</span><p class="eyebrow">A CLEARER VIEW OF YOUR NUMBERS</p><h2 id="empty-title">Start with four simple inputs</h2><p id="empty-description">Your income scenarios, net profit and break-even estimate will appear here. Nothing is assumed until you enter your figures.</p><div class="calc-empty-tags" aria-hidden="true"><span>Income range</span><span>Profit &amp; loss</span><span>Break-even</span></div></section>
+<div id="calc-results" hidden>
+<div class="calc-summary">
+<article class="calc-panel calc-primary"><p>Estimated net profit · average scenario</p><strong id="calc-net">—</strong><span id="calc-net-context"></span></article>
+<article class="calc-panel"><p>Estimated ROI</p><strong id="calc-roi">—</strong><span>Average net profit ÷ purchase price</span></article>
+<article class="calc-panel"><p>Break-even · average scenario</p><strong id="calc-break-even">—</strong><span id="calc-break-even-context"></span></article>
+</div>
+<section id="calc-risk" class="calc-risk" aria-labelledby="risk-title"><h2 id="risk-title"></h2><p id="risk-description"></p></section>
+<section class="calc-panel calc-comparison" aria-labelledby="comparison-title"><div class="calc-section-title"><span class="calc-step" aria-hidden="true">02</span><div><h2 id="comparison-title">Three views of the same product</h2><p id="calc-term"></p></div></div>
+<div class="calc-scenarios" id="calc-scenarios"></div>
+<figure class="calc-chart"><figcaption><h3>Total earnings vs purchase price</h3><p>Gross earnings before subtracting the purchase cost. The dashed line marks your purchase price.</p></figcaption><svg id="calc-chart" viewBox="0 0 680 240" role="img" aria-labelledby="chart-title chart-description"><title id="chart-title">Total earnings comparison</title><desc id="chart-description"></desc><g id="chart-content"></g></svg></figure>
+</section>
+<section class="calc-panel calc-ranges" aria-labelledby="range-title"><h2 id="range-title">Your profit range</h2><div class="calc-range-grid"><div><p>Total net profit range</p><strong id="calc-total-range"></strong><span>Total earnings minus the purchase price</span></div><div><p>Daily net profit range</p><strong id="calc-daily-range"></strong><span>Daily income minus purchase price ÷ duration</span></div></div><p class="calc-footnote">Daily net profit spreads the purchase cost evenly across the duration. It is not the amount paid out each day.</p></section>
+</div>
+<p class="calc-disclaimer">Estimates, not guaranteed returns. Actual income may fall outside the entered range, including zero; the full purchase price could be lost. Use these figures to compare scenarios, not as a promise of future earnings.</p>
+</div></div>
+<noscript><p class="message">Enable JavaScript to use this calculator.</p></noscript>
+</main><footer th:replace="~{fragments/footer :: footer}"></footer></body></html>

@@ -1,0 +1,670 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#241b36">
+
+    <title>Profile | Launchpad</title>
+
+    <link rel="icon" href="/assets/launchpad-logo.png">
+
+    <link rel="stylesheet" href="/assets/catalog.css">
+    <link rel="stylesheet" href="/assets/user-shell.css">
+    <link rel="stylesheet" href="/assets/profile.css">
+    <link rel="stylesheet" href="/assets/site-footer.css">
+
+    <script type="module" src="/assets/user-shell.js"></script>
+    <script type="module" src="/assets/profile.js"></script>
+<link rel="stylesheet" href="/assets/app-theme.css"></head>
+
+<body class="lp-app">
+
+<header th:replace="~{fragments/navigation :: navigation}"></header>
+
+<main id="main-content" tabindex="-1" class="profile-page">
+
+    <!-- =========================
+         MESSAGE
+    ========================== -->
+    <div id="message"
+         class="profile-message"
+         role="status"
+         hidden>
+    </div>
+
+
+    <!-- =========================
+         PAGE HEADING
+    ========================== -->
+    <section class="profile-heading">
+
+        <div class="heading-left">
+
+            <p class="profile-eyebrow">
+                YOUR PROFILE
+            </p>
+
+            <h1>
+                Welcome<span id="greeting"></span>.
+            </h1>
+
+            <p class="heading-subtitle">
+                Your account, all in one place.
+            </p>
+
+        </div>
+
+        <button
+            id="logout"
+            class="logout-button"
+            type="button">
+
+            <span>Log out</span>
+            <span class="logout-arrow"><svg class="lp-icon" aria-hidden="true"><use href="/assets/icons.svg#arrow"/></svg></span>
+
+        </button>
+
+    </section>
+
+
+    <!-- =========================
+         LOADING
+    ========================== -->
+    <div id="profile-loading" class="profile-loading">
+        <div class="loading-spinner"></div>
+        <span>Loading your profile...</span>
+    </div>
+
+
+    <!-- =========================
+         PROFILE CONTENT
+    ========================== -->
+    <section id="dashboard-content"
+             class="profile-content"
+             hidden>
+
+
+        <!-- =========================
+             HERO
+        ========================== -->
+        <section class="profile-hero">
+
+            <div class="hero-content">
+
+                <p class="hero-label">
+                    YOUR GLOBAL JOURNEY
+                </p>
+
+                <h2>
+                    One account.
+                    <br>
+                    <span>One global platform.</span>
+                </h2>
+
+                <p>
+                    Manage your Launchpad account,
+                    products, earnings and opportunities
+                    from one secure place.
+                </p>
+
+                <div class="hero-points">
+
+                    <span>
+                        <b><svg class="lp-icon" aria-hidden="true"><use href="/assets/icons.svg#check"/></svg></b>
+                        Secure account
+                    </span>
+
+                    <span>
+                        <b><svg class="lp-icon" aria-hidden="true"><use href="/assets/icons.svg#check"/></svg></b>
+                        Global products
+                    </span>
+
+                    <span>
+                        <b><svg class="lp-icon" aria-hidden="true"><use href="/assets/icons.svg#check"/></svg></b>
+                        Easy tracking
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- CSS globe -->
+            <div class="hero-globe">
+
+                <div class="globe-orbit orbit-one"></div>
+                <div class="globe-orbit orbit-two"></div>
+
+                <div class="globe">
+
+                    <div class="continent continent-one"></div>
+                    <div class="continent continent-two"></div>
+                    <div class="continent continent-three"></div>
+                    <div class="continent continent-four"></div>
+
+                    <span class="globe-dot dot-one"></span>
+                    <span class="globe-dot dot-two"></span>
+                    <span class="globe-dot dot-three"></span>
+                    <span class="globe-dot dot-four"></span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             IDENTITY CARD
+        ========================== -->
+        <section class="identity-card">
+
+            <div class="identity-main">
+
+                <div class="profile-avatar-wrapper">
+
+                    <div
+                        id="initials"
+                        class="profile-avatar">
+                    </div>
+
+                    <img
+                        id="avatar"
+                        class="profile-avatar-image"
+                        alt="Your profile photo"
+                        referrerpolicy="no-referrer"
+                        hidden>
+
+                    <span class="online-dot"></span>
+
+                </div>
+
+
+                <div class="identity-text">
+
+                    <h2 id="name">
+                        &mdash;
+                    </h2>
+
+                    <p id="email">
+                        &mdash;
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <button
+                class="edit-profile-button"
+                type="button">
+
+                <span><svg class="lp-icon" aria-hidden="true"><use href="/assets/icons.svg#edit"/></svg></span>
+                Edit Profile
+
+            </button>
+
+        </section>
+
+
+        <!-- =========================
+             QUICK INFORMATION
+        ========================== -->
+        <section class="quick-info-grid">
+
+
+            <article class="info-mini-card">
+
+                <div class="mini-icon green">
+                    <svg class="lp-icon" aria-hidden="true"><use href="/assets/icons.svg#check"/></svg>
+                </div>
+
+                <div>
+                    <span>Email Verified</span>
+                    <strong id="verified">&mdash;</strong>
+                </div>
+
+            </article>
+
+
+            <article class="info-mini-card">
+
+                <div class="mini-icon purple">
+                    <svg class="lp-icon" aria-hidden="true"><use href="/assets/icons.svg#calendar"/></svg>
+                </div>
+
+                <div>
+                    <span>Member Since</span>
+                    <strong id="created">&mdash;</strong>
+                </div>
+
+            </article>
+
+
+            <article class="info-mini-card">
+
+                <div class="mini-icon gold">
+                    <svg class="lp-icon" aria-hidden="true"><use href="/assets/icons.svg#activity"/></svg>
+                </div>
+
+                <div>
+                    <span>Last Sign-in</span>
+                    <strong id="last-login">&mdash;</strong>
+                </div>
+
+            </article>
+
+
+            <article class="info-mini-card">
+
+                <div class="mini-icon blue">
+                    #
+                </div>
+
+                <div class="account-id-content">
+
+                    <span>Account ID</span>
+
+                    <strong
+                        id="uid"
+                        title="Account ID">
+                        &mdash;
+                    </strong>
+
+                </div>
+
+                <button
+                    id="copyUid"
+                    class="copy-button"
+                    type="button"
+                    aria-label="Copy account ID">
+                    <svg class="lp-icon" aria-hidden="true"><use href="/assets/icons.svg#copy"/></svg>
+                </button>
+
+            </article>
+
+        </section>
+
+
+        <!-- =========================
+             TWO COLUMN AREA
+        ========================== -->
+        <section class="details-grid">
+
+
+            <!-- =====================
+                 ACCOUNT DETAILS
+            ====================== -->
+            <article class="details-card">
+
+                <div class="card-heading">
+
+                    <div class="heading-icon purple-icon">
+                        <svg class="lp-icon" aria-hidden="true"><use href="/assets/icons.svg#profile"/></svg>
+                    </div>
+
+                    <div>
+                        <h3>Account Details</h3>
+                        <p>
+                            Your account information and details.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="details-list">
+
+                    <div class="detail-row">
+
+                        <span>Full Name</span>
+
+                        <strong id="detail-name">
+                            &mdash;
+                        </strong>
+
+                    </div>
+
+
+                    <div class="detail-row">
+
+                        <span>Email Address</span>
+
+                        <div class="detail-value">
+
+                            <strong id="detail-email">
+                                &mdash;
+                            </strong>
+
+                            <em class="verified-badge">
+                                <svg class="lp-icon" aria-hidden="true"><use href="/assets/icons.svg#check"/></svg> Verified
+                            </em>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="detail-row">
+
+                        <span>Sign-in Method</span>
+
+                        <strong id="detail-provider">
+                            &mdash;
+                        </strong>
+
+                    </div>
+
+
+                    <div class="detail-row">
+
+                        <span>Member Since</span>
+
+                        <strong id="detail-created">
+                            &mdash;
+                        </strong>
+
+                    </div>
+
+
+                    <div class="detail-row">
+
+                        <span>Last Sign-in</span>
+
+                        <strong id="detail-login">
+                            &mdash;
+                        </strong>
+
+                    </div>
+
+
+                    <div class="detail-row account-row">
+
+                        <span>Account ID</span>
+
+                        <div class="account-value">
+
+                            <strong id="detail-uid">
+                                &mdash;
+                            </strong>
+
+                            <button
+                                id="copyUidBottom"
+                                type="button"
+                                class="small-copy">
+                                <svg class="lp-icon" aria-hidden="true"><use href="/assets/icons.svg#copy"/></svg>
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <!-- =====================
+                 SECURITY
+            ====================== -->
+            <article class="details-card security-card">
+
+                <div class="card-heading">
+
+                    <div class="heading-icon green-icon">
+                        <svg class="lp-icon" aria-hidden="true"><use href="/assets/icons.svg#check"/></svg>
+                    </div>
+
+                    <div>
+                        <h3>Account Security</h3>
+                        <p>
+                            Keep your Launchpad account secure.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="security-list">
+
+
+                    <div class="security-row">
+
+                        <div class="security-symbol verified-symbol">
+                            <svg class="lp-icon" aria-hidden="true"><use href="/assets/icons.svg#check"/></svg>
+                        </div>
+
+                        <div class="security-text">
+
+                            <strong>
+                                Email Verification
+                            </strong>
+
+                            <span>
+                                Your email is verified
+                            </span>
+
+                        </div>
+
+                        <span class="status verified">
+                            Verified
+                        </span>
+
+                    </div>
+
+
+                    <div class="security-row">
+
+                        <div class="security-symbol purple-symbol">
+                            <svg class="lp-icon" aria-hidden="true"><use href="/assets/icons.svg#shield"/></svg>
+                        </div>
+
+                        <div class="security-text">
+
+                            <strong>
+                                2-Factor Authentication
+                            </strong>
+
+                            <span>
+                                Add an extra layer of security
+                            </span>
+
+                        </div>
+
+                        <span class="status disabled">
+                            Not enabled
+                        </span>
+
+                        <span class="row-arrow">
+                            <svg class="lp-icon" aria-hidden="true"><use href="/assets/icons.svg#arrow"/></svg>
+                        </span>
+
+                    </div>
+
+
+                    <div class="security-row">
+
+                        <div class="security-symbol google-symbol">
+                            G
+                        </div>
+
+                        <div class="security-text">
+
+                            <strong>
+                                Connected Account
+                            </strong>
+
+                            <span id="connected-provider">
+                                Signed in with Google
+                            </span>
+
+                        </div>
+
+                        <span class="row-arrow">
+                            <svg class="lp-icon" aria-hidden="true"><use href="/assets/icons.svg#arrow"/></svg>
+                        </span>
+
+                    </div>
+
+
+                    <div class="security-row">
+
+                        <div class="security-symbol device-symbol">
+                            <svg class="lp-icon" aria-hidden="true"><use href="/assets/icons.svg#activity"/></svg>
+                        </div>
+
+                        <div class="security-text">
+
+                            <strong>
+                                Session Activity
+                            </strong>
+
+                            <span>
+                                Your current session is active
+                            </span>
+
+                        </div>
+
+                        <span class="manage-link">
+                            Manage
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+        </section>
+
+
+        <!-- =========================
+             BOTTOM PROMOTION CARDS
+        ========================== -->
+        <section class="profile-promotions">
+
+
+            <!-- REFER -->
+            <article class="promotion-card referral-card">
+
+                <div class="promotion-icon referral-icon">
+<svg class="lp-icon" aria-hidden="true"><use href="/assets/icons.svg#shield"/></svg>
+                </div>
+
+                <div class="promotion-content">
+
+                    <span class="promotion-label">
+                        GROW TOGETHER
+                    </span>
+
+                    <h3>
+                        Refer & Earn
+                    </h3>
+
+                    <p>
+                        Invite your friends and earn
+                        exciting rewards.
+                    </p>
+
+                    <a
+                        href="/features/invitation"
+                        class="promotion-button">
+
+                        Invite Now
+                        <span><svg class="lp-icon" aria-hidden="true"><use href="/assets/icons.svg#arrow"/></svg></span>
+
+                    </a>
+
+                </div>
+
+                <div class="promotion-art referral-art">
+
+                    <div class="gift-box">
+                        <div class="gift-ribbon"></div>
+                    </div>
+
+                    <span class="coin coin-one">&#8377;</span>
+                    <span class="coin coin-two">&#8377;</span>
+
+                </div>
+
+            </article>
+
+
+            <!-- EXPLORE -->
+            <article class="promotion-card products-card">
+
+                <div class="promotion-icon products-icon">
+                    <svg class="lp-icon" aria-hidden="true"><use href="/assets/icons.svg#shield"/></svg>
+                </div>
+
+                <div class="promotion-content">
+
+                    <span class="promotion-label">
+                        DISCOVER MORE
+                    </span>
+
+                    <h3>
+                        Explore Products
+                    </h3>
+
+                    <p>
+                        Discover global products and
+                        explore new opportunities.
+                    </p>
+
+                    <a
+                        href="/products"
+                        class="promotion-button gold-button">
+
+                        View Products
+                        <span><svg class="lp-icon" aria-hidden="true"><use href="/assets/icons.svg#arrow"/></svg></span>
+
+                    </a>
+
+                </div>
+
+                <div class="promotion-art globe-art">
+
+                    <div class="small-globe">
+                        <span></span>
+                    </div>
+
+                    <div class="product-box">
+                        <svg class="lp-icon" aria-hidden="true"><use href="/assets/icons.svg#activity"/></svg>
+                    </div>
+
+                </div>
+
+            </article>
+
+        </section>
+
+
+        <!-- =========================
+             MOBILE EXTRA SECURITY
+        ========================== -->
+        <section class="mobile-account-footer">
+
+            <div>
+                <span>Launchpad Account</span>
+                <strong>Secure & Protected</strong>
+            </div>
+
+            <div class="security-check">
+                <svg class="lp-icon" aria-hidden="true"><use href="/assets/icons.svg#check"/></svg>
+            </div>
+
+        </section>
+
+
+    </section>
+
+</main>
+
+
+<footer th:replace="~{fragments/footer :: footer}"></footer>
+
+</body>
+</html>

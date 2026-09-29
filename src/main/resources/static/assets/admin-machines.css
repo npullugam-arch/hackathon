@@ -1,0 +1,8 @@
+.section-tabs{flex-wrap:wrap}
+.section-tabs button{min-height:48px;text-align:left}
+.machine-card .product-image{object-fit:contain;background:#241b36}
+.machine-card .eyebrow{overflow-wrap:anywhere}
+.machine-card .muted{white-space:pre-wrap;overflow-wrap:anywhere}
+.icon-button{min-width:44px;min-height:44px}
+#machine-form textarea{resize:vertical}
+@media(max-width:420px){.section-tabs{gap:0}.section-tabs button{padding:12px 9px}.catalog-brand{font-size:17px}.catalog-brand span{display:none}}

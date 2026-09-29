@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#202239"><title>Welcome Â· Launchpad</title>
+  <link rel="icon" href="/assets/launchpad-logo.png" type="image/png">
+  <link rel="stylesheet" href="/assets/auth.css">
+  <script type="module" src="/assets/auth.js"></script>
+<link rel="stylesheet" href="/assets/auth-theme.css"></head>
+<body class="auth-page">
+  <main class="auth-shell">
+    <section class="story" aria-label="Welcome to Launchpad">
+      <a href="/" class="brand"><img class="brand-logo" src="/assets/launchpad-logo.png" alt="Launchpad"></a>
+      <div class="story-copy"><span class="eyebrow">A SPACE FOR WHAT'S NEXT</span>
+        <h1>Big ideas.<br> Fresh starts.<br><em>Your next chapter.</em></h1>
+        <p>Every great thing starts somewhere.<br>Make this your starting point.</p>
+      </div>
+      <div class="artwork" aria-hidden="true"><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="art-square square-back"></div><div class="art-square square-front"><span></span></div><span class="art-spark" aria-hidden="true"></span><span class="art-dot"></span></div>
+      <div class="story-footer"><span class="small-seal" aria-hidden="true"><svg class="lp-icon"><use href="/assets/icons.svg#shield"/></svg></span> One account. A world of possibilities.</div>
+    </section>
+    <section class="form-panel">
+      <div class="top-note">A little ambition goes a long way.</div>
+      <div class="form-content">
+        <a id="back-link" class="back-link" href="/" hidden>Back to welcome</a>
+        <span class="section-kicker" id="section-kicker">LET'S GET STARTED</span>
+        <h2 id="page-title">Your next step<br>starts here.</h2>
+        <p class="subtitle" id="page-description">New here or picking up where you left off?<br>There's a place for you.</p>
+
+        <div id="message" class="message" role="status" aria-live="polite" hidden></div>
+        <div id="landing-actions" class="landing-actions">
+          <a href="/register" class="choice-card primary-choice"><span class="choice-icon"><svg class="lp-icon" aria-hidden="true"><use href="/assets/icons.svg#gift"/></svg></span><span><strong>Register</strong><small>A fresh start for your next big idea</small></span><span class="choice-arrow" aria-hidden="true"><svg class="lp-icon"><use href="/assets/icons.svg#arrow"/></svg></span></a>
+          <a href="/login" class="choice-card"><span class="choice-icon"><svg class="lp-icon" aria-hidden="true"><use href="/assets/icons.svg#profile"/></svg></span><span><strong>Login</strong><small>Welcome back. Let us keep going.</small></span><span class="choice-arrow" aria-hidden="true"><svg class="lp-icon"><use href="/assets/icons.svg#arrow"/></svg></span></a>
+        </div>
+
+        <div id="auth-actions" hidden>
+          <button class="google-button" id="google-button" type="button" disabled><img src="/assets/google.svg" alt="" width="20" height="20"><span>Continue with Google</span><span class="spinner" aria-hidden="true" hidden></span></button>
+          <p id="register-note" class="helper" hidden>Use your Google account to get started. Already joined? Weâ€™ll sign you right in.</p>
+          <div id="email-section" hidden>
+            <div class="divider"><span>or use your email</span></div>
+            <form id="login-form">
+              <label for="email">Email address</label>
+              <input id="email" name="email" type="email" placeholder="you@example.com" autocomplete="username" maxlength="254" required>
+              <div class="label-row"><label for="password">Password</label><a href="/forgot-password">Forgot password?</a></div>
+              <div class="password-field"><input id="password" name="password" type="password" placeholder="Enter your password" autocomplete="current-password" required><button id="toggle-password" type="button" aria-label="Show password" aria-pressed="false">Show</button></div>
+              <button class="primary-button" id="login-button" type="submit" disabled><span>Login</span><span class="button-arrow" aria-hidden="true">â†’</span><span class="spinner" aria-hidden="true" hidden></span></button>
+            </form>
+          </div>
+        </div>
+
+        <form id="reset-form" hidden>
+          <label for="reset-email">Email address</label>
+          <input id="reset-email" name="email" type="email" placeholder="you@example.com" autocomplete="email" maxlength="254" required>
+          <button class="primary-button" id="reset-button" type="submit" disabled><span>Send reset link</span><span class="button-arrow" aria-hidden="true">â†’</span><span class="spinner" aria-hidden="true" hidden></span></button>
+          <p class="helper">If you joined with Google, continue with Google on the login page.</p>
+        </form>
+        <p class="switch-page" id="switch-page" hidden></p>
+        <div class="privacy-note"><svg width="15" height="17" viewBox="0 0 20 22" fill="none" aria-hidden="true"><path d="M10 1 18 4v6c0 5-4 8-8 11-4-3-8-6-8-11V4l8-3Z" stroke="currentColor" stroke-width="1.5"/><path d="m6 10 3 3 5-6" stroke="currentColor" stroke-width="1.5"/></svg> Secure sign-in. A space that\'s yours.</div>
+        <noscript><p class="message">Please enable JavaScript to sign in securely.</p></noscript>
+      </div>
+      <footer class="panel-footer"><span>BUILT FOR NEW BEGINNINGS</span><span>Launchpad Â© <span id="year">2026</span></span></footer>
+    </section>
+  </main>
+</body>
+</html>
+
