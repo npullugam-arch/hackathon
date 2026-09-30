@@ -44,7 +44,7 @@ public class CatalogRepository {
                 p.dailyIncome(), p.minimumDailyIncome(), total, p.description().trim(), p.active(), p.countryName(), p.countryUrl(), p.tag(), id};
         String sql = create ? """
                 INSERT INTO public.products (title,image_url,original_price,discount_price,duration_days,daily_income,minimum_daily_income,
-                total_earnings,description,active,id) VALUES (?,?,?,?,?,?,?,?,?,?,?) RETURNING *, 0::bigint AS sold_count
+                total_earnings,description,active,country_name,country_url,tag,id) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?) RETURNING *, 0::bigint AS sold_count
                 """ : """
                 UPDATE public.products SET title=?,image_url=?,original_price=?,discount_price=?,duration_days=?,daily_income=?,minimum_daily_income=?,
                 total_earnings=?,description=?,active=?,country_name=?,country_url=?,tag=?,updated_at=clock_timestamp() WHERE id=? RETURNING *, 0::bigint AS sold_count

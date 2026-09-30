@@ -34,11 +34,20 @@ public class FirebaseAuthService {
         if (properties.serviceAccountJson() != null && !properties.serviceAccountJson().isBlank()) {
             credentials = GoogleCredentials.fromStream(new ByteArrayInputStream(
                     properties.serviceAccountJson().replace("\\n", "\n").getBytes(StandardCharsets.UTF_8)));
-        } else if (properties.serviceAccountPath() == null || properties.serviceAccountPath().isBlank()) {
-            credentials = GoogleCredentials.getApplicationDefault();
         } else {
-            try (var input = Files.newInputStream(Path.of(properties.serviceAccountPath()))) {
-                credentials = GoogleCredentials.fromStream(input);
+            Path credentialPath = null;
+            if (properties.serviceAccountPath() != null && !properties.serviceAccountPath().isBlank()) {
+                credentialPath = Path.of(properties.serviceAccountPath());
+            } else {
+                Path localFallback = Path.of(System.getProperty("user.home"), "Downloads", "hackathon-admin.json");
+                if (Files.isRegularFile(localFallback)) credentialPath = localFallback;
+            }
+            if (credentialPath != null) {
+                try (var input = Files.newInputStream(credentialPath)) {
+                    credentials = GoogleCredentials.fromStream(input);
+                }
+            } else {
+                credentials = GoogleCredentials.getApplicationDefault();
             }
         }
         app = FirebaseApp.initializeApp(FirebaseOptions.builder().setCredentials(credentials)

@@ -25,7 +25,16 @@ export async function post(path, body) {
 
 export function showMessage(text, kind = 'error') {
   const message = document.getElementById('message');
+  if (!message) return;
   message.textContent = text;
   message.className = `message ${kind}`;
   message.hidden = !text;
+  if (text) {
+    message.setAttribute('role', kind === 'error' ? 'alert' : 'status');
+    message.setAttribute('tabindex', '-1');
+    requestAnimationFrame(() => {
+      message.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'nearest' });
+      message.focus({ preventScroll: true });
+    });
+  }
 }

@@ -1,24 +1,264 @@
-:root{--green:#55458a;--lime:#e4c68f;--paper:#f5f6fa;--text:#26273b;--muted:#73788d;--line:#e1e4ed}.auth-page{background:#f5f6fa}.auth-page .story{background:linear-gradient(140deg,#1d2035,#322b46);border-radius:18px}.auth-page .brand-dot,.auth-page .story em{color:#e4c68f}.auth-page .art-square{border-color:#a693bf}.auth-page .square-front{background:#e4c68f;color:#2a243c}.auth-page .form-panel{background:#fff;border-radius:18px}.auth-page .primary{background:#29263f;border-radius:10px}.auth-page .story-copy h1{letter-spacing:-2px}.auth-page input{border-radius:9px}@media(max-width:767px){.auth-page .auth-shell{padding:12px;gap:12px}.auth-page .form-panel{padding:22px}.auth-page .story{min-height:210px;padding:22px}.auth-page .story-copy h1{font-size:30px}.auth-page .story-copy p{font-size:12px}}
-/* Refined mobile landing presentation */
-@media(max-width:700px){
-  .auth-page{background:#f5f6fa}
-  .auth-page .auth-shell{padding:10px;display:block}
-  .auth-page .story{min-height:250px;padding:20px 22px 24px;border-radius:20px;background:linear-gradient(145deg,#17192c 0%,#2b2744 70%,#44345c 100%);box-shadow:0 12px 30px #17192c30}
-  .auth-page .brand{display:block}
-  .auth-page .brand-logo{display:block;width:150px;height:auto;max-height:68px;object-fit:contain;object-position:left center}
-  .auth-page .story-copy{margin-top:34px}
-  .auth-page .story-copy h1{font-size:30px;line-height:1.12;letter-spacing:-1.2px;margin:0;color:#fff}
-  .auth-page .story-copy h1 em{color:#e4c68f}
-  .auth-page .form-panel{margin-top:10px;border-radius:20px;padding:25px 22px 16px;box-shadow:0 8px 24px #25233c12}
-  .auth-page .form-content{padding:8px 0 28px}
-  .auth-page h2{font-size:32px;line-height:1.12}
-  .auth-page .choice-card{min-height:76px;padding:15px 14px;border-radius:13px}
-  .auth-page .choice-card small{font-size:10px}
-  .auth-page .choice-arrow{font-size:18px}
+:root {
+    --green: #55458a;
+    --lime: #e4c68f;
+    --paper: #f5f6fa;
+    --text: #26273b;
+    --muted: #73788d;
+    --line: #e1e4ed;
 }
-.auth-page .choice-icon .lp-icon,.auth-page .choice-arrow .lp-icon{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.7}
-.auth-page .choice-arrow{display:grid;place-items:center}
-/* Desktop logo sizing: the supplied puppy wordmark is a complete image. */
-.auth-page .brand-logo{display:block;width:min(310px,72%);height:auto;max-height:92px;object-fit:contain;object-position:left center}
-.auth-page .small-seal .lp-icon{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:1.5}
-@media(max-width:1000px) and (min-width:701px){.auth-page .brand-logo{width:min(240px,80%);max-height:72px}}
+
+
+/* =========================================================
+   AUTH THEME
+   ========================================================= */
+
+.auth-page {
+    background: var(--paper);
+}
+
+
+.auth-page .story {
+    background:
+        linear-gradient(
+            140deg,
+            #17192d,
+            #292440 65%,
+            #403257
+        );
+}
+
+
+.auth-page .brand-dot,
+.auth-page .story em {
+    color: var(--lime);
+}
+
+
+.auth-page .art-square {
+    border-color: #a693bf;
+}
+
+
+.auth-page .square-front {
+    background: var(--lime);
+
+    color: #2a243c;
+}
+
+
+.auth-page .form-panel {
+    background: #ffffff;
+
+    border-radius: 20px;
+}
+
+
+.auth-page .primary {
+    background: #29263f;
+
+    border-radius: 10px;
+}
+
+
+.auth-page .story-copy h1 {
+    letter-spacing: -2px;
+}
+
+
+.auth-page input {
+    border-radius: 9px;
+}
+
+
+.auth-page .choice-icon .lp-icon,
+.auth-page .choice-arrow .lp-icon {
+    width: 18px;
+
+    height: 18px;
+
+    fill: none;
+
+    stroke: currentColor;
+
+    stroke-width: 1.7;
+}
+
+
+.auth-page .choice-arrow {
+    display: grid;
+
+    place-items: center;
+}
+
+
+.auth-page .brand-logo {
+    display: block;
+
+    width: min(310px, 72%);
+
+    height: auto;
+
+    max-height: 92px;
+
+    object-fit: contain;
+
+    object-position: left center;
+}
+
+
+.auth-page .small-seal .lp-icon {
+    width: 14px;
+
+    height: 14px;
+
+    fill: none;
+
+    stroke: currentColor;
+
+    stroke-width: 1.5;
+}
+
+
+/* =========================================================
+   MOBILE AUTH THEME
+   ========================================================= */
+
+@media(max-width:767px) {
+
+    .auth-page {
+        background: var(--paper);
+    }
+
+    .auth-page .auth-shell {
+        padding: 0;
+
+        display: block;
+    }
+
+    .auth-page .story {
+        min-height: 250px;
+
+        padding:
+            20px
+            22px
+            24px;
+
+        border-radius: 0;
+
+        background:
+            linear-gradient(
+                145deg,
+                #17192c 0%,
+                #2b2744 70%,
+                #44345c 100%
+            );
+
+        box-shadow:
+            0 12px 30px
+            #17192c30;
+    }
+
+    .auth-page .brand {
+        display: block;
+    }
+
+    .auth-page .brand-logo {
+        display: block;
+
+        width: 150px;
+
+        height: auto;
+
+        max-height: 68px;
+
+        object-fit: contain;
+
+        object-position: left center;
+    }
+
+    .auth-page .story-copy {
+        margin-top: 34px;
+    }
+
+    .auth-page .story-copy h1 {
+        margin: 0;
+
+        color: #ffffff;
+
+        font-size: 30px;
+
+        line-height: 1.12;
+
+        letter-spacing: -1.2px;
+    }
+
+    .auth-page .story-copy h1 em {
+        color: var(--lime);
+    }
+
+    .auth-page .story-copy p {
+        display: none;
+    }
+
+    .auth-page .form-panel {
+        margin-top: 10px;
+
+        padding:
+            25px
+            22px
+            16px;
+
+        border-radius: 20px;
+
+        box-shadow:
+            0 8px 24px
+            #25233c12;
+    }
+
+    .auth-page .form-content {
+        padding:
+            8px
+            0
+            28px;
+    }
+
+    .auth-page h2 {
+        font-size: 32px;
+
+        line-height: 1.12;
+    }
+
+    .auth-page .choice-card {
+        min-height: 76px;
+
+        padding:
+            15px
+            14px;
+
+        border-radius: 13px;
+    }
+
+    .auth-page .choice-card small {
+        font-size: 10px;
+    }
+
+    .auth-page .choice-arrow {
+        font-size: 18px;
+    }
+
+}
+
+
+/* =========================================================
+   TABLET AUTH LOGO
+   ========================================================= */
+
+@media(max-width:1000px) and (min-width:701px) {
+
+    .auth-page .brand-logo {
+        width: min(240px, 80%);
+
+        max-height: 72px;
+    }
+
+}

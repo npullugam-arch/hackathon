@@ -6,6 +6,7 @@ import './admin-purchases.js';
 import './admin-invitations.js';
 import './admin-support.js';
 import './admin-photo-tasks.js';
+import './admin-users.js?v=3';
 import { element, image, productCard, money } from './catalog-ui.js';
 const $ = id => document.getElementById(id);
 const productForm = $('product-form'), adForm = $('ad-form'), machineForm=$('machine-form');

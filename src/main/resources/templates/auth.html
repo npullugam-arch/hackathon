@@ -1,65 +1,1431 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#202239"><title>Welcome Â· Launchpad</title>
-  <link rel="icon" href="/assets/launchpad-logo.png" type="image/png">
-  <link rel="stylesheet" href="/assets/auth.css">
-  <script type="module" src="/assets/auth.js"></script>
-<link rel="stylesheet" href="/assets/auth-theme.css"></head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta name="theme-color" content="#17152c">
+
+    <title>Welcome · Launchpad</title>
+
+    <link
+        rel="icon"
+        href="/assets/launchpad-logo.png"
+        type="image/png"
+    >
+
+    <link
+        rel="stylesheet"
+        href="/assets/auth.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="/assets/auth-theme.css"
+    >
+
+    <script
+        type="module"
+        src="/assets/auth.js"
+    ></script>
+</head>
+
+
 <body class="auth-page">
-  <main class="auth-shell">
-    <section class="story" aria-label="Welcome to Launchpad">
-      <a href="/" class="brand"><img class="brand-logo" src="/assets/launchpad-logo.png" alt="Launchpad"></a>
-      <div class="story-copy"><span class="eyebrow">A SPACE FOR WHAT'S NEXT</span>
-        <h1>Big ideas.<br> Fresh starts.<br><em>Your next chapter.</em></h1>
-        <p>Every great thing starts somewhere.<br>Make this your starting point.</p>
-      </div>
-      <div class="artwork" aria-hidden="true"><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="art-square square-back"></div><div class="art-square square-front"><span></span></div><span class="art-spark" aria-hidden="true"></span><span class="art-dot"></span></div>
-      <div class="story-footer"><span class="small-seal" aria-hidden="true"><svg class="lp-icon"><use href="/assets/icons.svg#shield"/></svg></span> One account. A world of possibilities.</div>
+
+
+<!-- =====================================================
+     PUBLIC LANDING PAGE
+     ===================================================== -->
+
+<main
+    id="public-landing"
+    class="public-landing"
+    hidden
+>
+
+
+    <!-- =========================
+         NAVIGATION
+         ========================= -->
+
+    <header class="landing-nav">
+
+        <a
+            href="/"
+            class="landing-brand"
+            aria-label="Launchpad home"
+        >
+            <img
+                src="/assets/launchpad-logo.png"
+                alt="Launchpad"
+            >
+        </a>
+
+
+        <nav
+            class="landing-navigation"
+            aria-label="Main navigation"
+        >
+
+            <a href="#opportunities">
+                Opportunities
+            </a>
+
+            <a href="#projects">
+                Projects
+            </a>
+
+            <a href="#experience">
+                Experience
+            </a>
+
+            <a href="#trust">
+                Trust
+            </a>
+
+        </nav>
+
+
+        <div class="landing-nav-actions">
+
+            <a
+                href="/login"
+                class="nav-login"
+            >
+                Login
+            </a>
+
+            <a
+                href="/register"
+                class="nav-register"
+            >
+                Register
+            </a>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =================================================
+         HERO
+         ================================================= -->
+
+    <section class="landing-hero">
+
+        <div class="hero-background-orbit orbit-a"></div>
+        <div class="hero-background-orbit orbit-b"></div>
+        <div class="hero-background-glow"></div>
+
+
+        <div class="hero-content">
+
+            <span class="landing-kicker">
+                A GLOBAL OPPORTUNITY PLATFORM
+            </span>
+
+
+            <h1>
+                Global Opportunities.
+                <br>
+                <em>One Platform.</em>
+            </h1>
+
+
+            <p class="hero-description">
+                Discover projects and opportunities from around
+                the world through Launchpad.
+            </p>
+
+
+            <p class="hero-description secondary">
+                Explore available opportunities, follow your
+                activity and manage everything from one place.
+            </p>
+
+
+            <div class="hero-buttons">
+
+                <a
+                    href="/register"
+                    class="landing-button primary"
+                >
+                    Register Now
+                    <span>→</span>
+                </a>
+
+
+                <a
+                    href="/login"
+                    class="landing-button outline"
+                >
+                    Login
+                    <span>→</span>
+                </a>
+
+            </div>
+
+
+            <div class="hero-highlights">
+
+                <span>
+                    ◈ Global access
+                </span>
+
+                <span>
+                    ◎ Organized workspace
+                </span>
+
+                <span>
+                    ✦ Simple experience
+                </span>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- HERO VISUAL -->
+
+        <div class="hero-visual">
+
+            <div class="hero-glow"></div>
+
+
+            <!-- Main device -->
+
+            <div class="hero-device main-device">
+
+                <div class="device-top">
+
+                    <span class="device-time">
+                        09:41
+                    </span>
+
+                    <span class="device-status">
+                        ● ●
+                    </span>
+
+                </div>
+
+
+                <div class="device-brand">
+
+                    <img
+                        src="/assets/launchpad-logo.png"
+                        alt="Launchpad"
+                    >
+
+                </div>
+
+
+                <div class="device-heading">
+                    Welcome back
+                </div>
+
+
+                <div class="device-balance-grid">
+
+                    <div class="device-balance">
+
+                        <small>
+                            RECHARGE BALANCE
+                        </small>
+
+                        <strong>
+                            ₹20,500
+                        </strong>
+
+                    </div>
+
+
+                    <div class="device-balance">
+
+                        <small>
+                            WITHDRAWAL
+                        </small>
+
+                        <strong>
+                            ₹56,320
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="device-feature">
+
+                    <small>
+                        ONE PLATFORM. A WORLD OF POSSIBILITIES.
+                    </small>
+
+                    <strong>
+                        Explore global
+                        opportunities.
+                    </strong>
+
+                    <span>
+                        Discover what's available →
+                    </span>
+
+                </div>
+
+
+                <div class="device-items">
+
+                    <div>
+                        <span>◇</span>
+                        My Product
+                    </div>
+
+                    <div>
+                        <span>□</span>
+                        Recharge
+                    </div>
+
+                    <div>
+                        <span>✧</span>
+                        Spin & Earn
+                    </div>
+
+                    <div>
+                        <span>♧</span>
+                        My Team
+                    </div>
+
+                </div>
+
+
+                <div class="device-bottom">
+
+                    <span>⌂</span>
+                    <span>◇</span>
+                    <span>▣</span>
+                    <span>⌁</span>
+                    <span>♙</span>
+
+                </div>
+
+            </div>
+
+
+            <!-- Secondary device -->
+
+            <div class="hero-device secondary-device">
+
+                <div class="device-top">
+                    <span>09:41</span>
+                    <span>● ●</span>
+                </div>
+
+                <div class="secondary-title">
+                    Project Activity
+                </div>
+
+                <div class="fake-chart">
+
+                    <span class="chart-line"></span>
+
+                    <i class="bar bar-one"></i>
+                    <i class="bar bar-two"></i>
+                    <i class="bar bar-three"></i>
+                    <i class="bar bar-four"></i>
+                    <i class="bar bar-five"></i>
+
+                </div>
+
+                <div class="secondary-row"></div>
+                <div class="secondary-row"></div>
+                <div class="secondary-row short"></div>
+
+            </div>
+
+
+            <span class="floating-coin coin-one">
+                ₹
+            </span>
+
+            <span class="floating-coin coin-two">
+                +
+            </span>
+
+            <span class="floating-coin coin-three">
+                ◆
+            </span>
+
+        </div>
+
     </section>
+
+
+
+    <!-- =================================================
+         SECTION 1 — GLOBAL OPPORTUNITIES
+         ================================================= -->
+
+    <section
+        id="opportunities"
+        class="landing-section landing-global reveal-section"
+    >
+
+        <div class="landing-visual reference-visual">
+
+            <img
+                src="https://hi.com/images/home/content-1.png"
+                alt="Global opportunities"
+                loading="lazy"
+            >
+
+        </div>
+
+
+        <div class="landing-copy">
+
+            <span class="landing-kicker">
+                GLOBAL OPPORTUNITIES
+            </span>
+
+
+            <h2>
+                Discover Global
+                <em>Opportunities.</em>
+            </h2>
+
+
+            <p>
+                Explore projects and opportunities from different
+                markets through one simple platform.
+            </p>
+
+
+            <p>
+                Review information, understand what is available
+                and keep everything organized in one place.
+            </p>
+
+
+            <a
+                href="/register"
+                class="landing-link"
+            >
+                Explore Launchpad
+                <span>→</span>
+            </a>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         SECTION 2 — PROJECTS
+         ================================================= -->
+
+    <section
+        id="projects"
+        class="landing-section landing-projects reveal-section"
+    >
+
+        <div class="landing-copy">
+
+            <span class="landing-kicker">
+                PROJECT DISCOVERY
+            </span>
+
+
+            <h2>
+                Explore
+                <em>Projects.</em>
+            </h2>
+
+
+            <p>
+                Review project information, expected earnings
+                and available opportunities in one organized
+                experience.
+            </p>
+
+
+            <p>
+                Keep the information you need close at hand
+                before making your decisions.
+            </p>
+
+
+            <a
+                href="/login"
+                class="landing-link"
+            >
+                View Projects
+                <span>→</span>
+            </a>
+
+        </div>
+
+
+        <div class="landing-visual reference-visual">
+
+            <img
+                src="https://hi.com/images/home/content-3.png"
+                alt="Explore projects"
+                loading="lazy"
+            >
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         SECTION 3 — TRACKING
+         ================================================= -->
+
+    <section
+        class="landing-section landing-track reveal-section"
+    >
+
+        <div class="landing-visual reference-visual">
+
+            <img
+                src="https://hi.com/images/home/content-6.png"
+                alt="Track progress"
+                loading="lazy"
+            >
+
+        </div>
+
+
+        <div class="landing-copy">
+
+            <span class="landing-kicker">
+                TRACK & MANAGE
+            </span>
+
+
+            <h2>
+                Track Your
+                <em>Progress.</em>
+            </h2>
+
+
+            <p>
+                Keep your project activity and expected earnings
+                organized in one simple dashboard.
+            </p>
+
+
+            <ul>
+
+                <li>
+                    See account activity at a glance
+                </li>
+
+                <li>
+                    Review project information
+                </li>
+
+                <li>
+                    Keep your next move organized
+                </li>
+
+            </ul>
+
+
+            <a
+                href="/login"
+                class="landing-link"
+            >
+                View Your Workspace
+                <span>→</span>
+            </a>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         SECTION 4 — SIMPLE EXPERIENCE
+         ================================================= -->
+
+    <section
+        id="experience"
+        class="landing-section landing-simple reveal-section"
+    >
+
+        <div class="section-intro">
+
+            <span class="landing-kicker">
+                A BETTER EXPERIENCE
+            </span>
+
+
+            <h2>
+                Simple Design.
+                <br>
+                <em>Powerful Experience.</em>
+            </h2>
+
+
+            <p>
+                Register, explore what's available, manage your
+                account and stay informed through one focused
+                platform.
+            </p>
+
+        </div>
+
+
+        <div class="experience-steps">
+
+            <div>
+
+                <b>
+                    01
+                </b>
+
+                <h3>
+                    Create your account
+                </h3>
+
+                <p>
+                    Get started with a straightforward account
+                    setup.
+                </p>
+
+            </div>
+
+
+            <div>
+
+                <b>
+                    02
+                </b>
+
+                <h3>
+                    Explore what's available
+                </h3>
+
+                <p>
+                    Review projects and information at your
+                    own pace.
+                </p>
+
+            </div>
+
+
+            <div>
+
+                <b>
+                    03
+                </b>
+
+                <h3>
+                    Stay informed
+                </h3>
+
+                <p>
+                    Keep your activity and decisions organized.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         SECTION 5 — TRUST
+         ================================================= -->
+
+    <section
+        id="trust"
+        class="landing-trust reveal-section"
+    >
+
+        <div>
+
+            <span class="landing-kicker">
+                SECURITY & TRUST
+            </span>
+
+
+            <h2>
+                Your Information
+                <br>
+                Deserves Care.
+            </h2>
+
+
+            <p>
+                Launchpad is designed around secure account
+                access, clear information and responsible
+                decision-making.
+            </p>
+
+
+            <p>
+                Review each opportunity carefully and choose
+                what fits your own goals.
+            </p>
+
+        </div>
+
+
+        <div class="trust-mark">
+
+            <span class="trust-symbol">
+                ✓
+            </span>
+
+            <span>
+                SECURE ACCOUNT ACCESS
+            </span>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         SECTION 6 — POTENTIAL RETURNS
+         ================================================= -->
+
+    <section
+        class="landing-section earnings-section reveal-section"
+    >
+
+        <div class="earnings-visual">
+
+            <div class="earnings-card">
+
+                <span>
+                    PROJECT ACTIVITY
+                </span>
+
+                <strong>
+                    Track Potential Returns
+                </strong>
+
+                <p>
+                    Review project information and expected
+                    earnings before making decisions.
+                </p>
+
+
+                <div class="earnings-bars">
+
+                    <i style="height:38%"></i>
+                    <i style="height:52%"></i>
+                    <i style="height:45%"></i>
+                    <i style="height:68%"></i>
+                    <i style="height:60%"></i>
+                    <i style="height:78%"></i>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="landing-copy">
+
+            <span class="landing-kicker">
+                PROJECT ACTIVITY
+            </span>
+
+
+            <h2>
+                Track Potential
+                <em>Returns.</em>
+            </h2>
+
+
+            <p>
+                Review project information and expected earnings
+                before making decisions.
+            </p>
+
+
+            <p>
+                Keep your activity organized so you can understand
+                what is happening across your workspace.
+            </p>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         RAZORPAY
+         ================================================= -->
+
+    <section
+        class="landing-provider reveal-section"
+    >
+
+        <span class="landing-kicker">
+            PAYMENT PROVIDER
+        </span>
+
+
+        <h2>
+            Powered by Razorpay
+        </h2>
+
+
+        <p>
+            Payments are handled through the existing
+            Razorpay checkout integration.
+        </p>
+
+
+        <img
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6jSjWPrDqqBdf_-L8ovMuT-OZ0hKZ8hXmzeRPpgAEVA&s=10"
+            alt="Razorpay"
+            loading="lazy"
+            referrerpolicy="no-referrer"
+        >
+
+    </section>
+
+
+
+    <!-- =================================================
+         FINAL CTA
+         ================================================= -->
+
+    <section
+        class="landing-final reveal-section"
+    >
+
+        <span class="landing-kicker">
+            YOUR NEXT CHAPTER
+        </span>
+
+
+        <h2>
+            Your Next Opportunity
+            <br>
+            <em>Starts Here.</em>
+        </h2>
+
+
+        <p>
+            Create your Launchpad account and explore
+            what's available.
+        </p>
+
+
+        <div class="final-buttons">
+
+            <a
+                href="/register"
+                class="landing-button light"
+            >
+                Register
+                <span>→</span>
+            </a>
+
+
+            <a
+                href="/login"
+                class="landing-button outline"
+            >
+                Login
+                <span>→</span>
+            </a>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         EXISTING-STYLE FOOTER
+         ================================================= -->
+
+    <footer class="landing-footer">
+
+        <div class="footer-brand">
+
+            <img
+                src="/assets/launchpad-logo.png"
+                alt="Launchpad"
+            >
+
+            <p>
+                A space for what's next.
+            </p>
+
+        </div>
+
+
+        <div class="footer-links">
+
+            <a href="/">
+                Home
+            </a>
+
+            <a href="/login">
+                Login
+            </a>
+
+            <a href="/register">
+                Register
+            </a>
+
+            <a href="/customer-service">
+                Support
+            </a>
+
+            <a href="/privacy">
+                Privacy
+            </a>
+
+            <a href="/terms">
+                Terms
+            </a>
+
+        </div>
+
+
+        <div class="footer-copy">
+
+            Launchpad ©
+            <span class="landing-year">
+                2026
+            </span>
+
+        </div>
+
+    </footer>
+
+</main>
+
+
+
+<!-- =====================================================
+     AUTHENTICATION PAGE
+     ===================================================== -->
+
+<main
+    id="auth-shell"
+    class="auth-shell"
+    hidden
+>
+
+
+    <section
+        class="story"
+        aria-label="Welcome to Launchpad"
+    >
+
+        <a
+            href="/"
+            class="brand"
+        >
+
+            <img
+                class="brand-logo"
+                src="/assets/launchpad-logo.png"
+                alt="Launchpad"
+            >
+
+        </a>
+
+
+        <div class="story-copy">
+
+            <span class="eyebrow">
+                A SPACE FOR WHAT'S NEXT
+            </span>
+
+
+            <h1>
+                Big ideas.
+                <br>
+                Fresh starts.
+                <br>
+                <em>Your next chapter.</em>
+            </h1>
+
+
+            <p>
+                Every great thing starts somewhere.
+                <br>
+                Make this your starting point.
+            </p>
+
+        </div>
+
+
+        <div
+            class="artwork"
+            aria-hidden="true"
+        >
+
+            <div class="orbit orbit-one"></div>
+
+            <div class="orbit orbit-two"></div>
+
+            <div class="art-square square-back"></div>
+
+            <div class="art-square square-front">
+                <span>01</span>
+            </div>
+
+            <span class="art-spark">
+                ✦
+            </span>
+
+            <span class="art-dot"></span>
+
+        </div>
+
+
+        <div class="story-footer">
+
+            <span class="small-seal">
+
+                <svg class="lp-icon">
+                    <use href="/assets/icons.svg#shield"></use>
+                </svg>
+
+            </span>
+
+            One account. A world of possibilities.
+
+        </div>
+
+    </section>
+
+
+
+    <!-- AUTH FORM -->
+
     <section class="form-panel">
-      <div class="top-note">A little ambition goes a long way.</div>
-      <div class="form-content">
-        <a id="back-link" class="back-link" href="/" hidden>Back to welcome</a>
-        <span class="section-kicker" id="section-kicker">LET'S GET STARTED</span>
-        <h2 id="page-title">Your next step<br>starts here.</h2>
-        <p class="subtitle" id="page-description">New here or picking up where you left off?<br>There's a place for you.</p>
 
-        <div id="message" class="message" role="status" aria-live="polite" hidden></div>
-        <div id="landing-actions" class="landing-actions">
-          <a href="/register" class="choice-card primary-choice"><span class="choice-icon"><svg class="lp-icon" aria-hidden="true"><use href="/assets/icons.svg#gift"/></svg></span><span><strong>Register</strong><small>A fresh start for your next big idea</small></span><span class="choice-arrow" aria-hidden="true"><svg class="lp-icon"><use href="/assets/icons.svg#arrow"/></svg></span></a>
-          <a href="/login" class="choice-card"><span class="choice-icon"><svg class="lp-icon" aria-hidden="true"><use href="/assets/icons.svg#profile"/></svg></span><span><strong>Login</strong><small>Welcome back. Let us keep going.</small></span><span class="choice-arrow" aria-hidden="true"><svg class="lp-icon"><use href="/assets/icons.svg#arrow"/></svg></span></a>
+        <div class="top-note">
+            A little ambition goes a long way.
         </div>
 
-        <div id="auth-actions" hidden>
-          <button class="google-button" id="google-button" type="button" disabled><img src="/assets/google.svg" alt="" width="20" height="20"><span>Continue with Google</span><span class="spinner" aria-hidden="true" hidden></span></button>
-          <p id="register-note" class="helper" hidden>Use your Google account to get started. Already joined? Weâ€™ll sign you right in.</p>
-          <div id="email-section" hidden>
-            <div class="divider"><span>or use your email</span></div>
-            <form id="login-form">
-              <label for="email">Email address</label>
-              <input id="email" name="email" type="email" placeholder="you@example.com" autocomplete="username" maxlength="254" required>
-              <div class="label-row"><label for="password">Password</label><a href="/forgot-password">Forgot password?</a></div>
-              <div class="password-field"><input id="password" name="password" type="password" placeholder="Enter your password" autocomplete="current-password" required><button id="toggle-password" type="button" aria-label="Show password" aria-pressed="false">Show</button></div>
-              <button class="primary-button" id="login-button" type="submit" disabled><span>Login</span><span class="button-arrow" aria-hidden="true">â†’</span><span class="spinner" aria-hidden="true" hidden></span></button>
+
+        <div class="form-content">
+
+            <a
+                id="back-link"
+                class="back-link"
+                href="/"
+                hidden
+            >
+                Back to welcome
+            </a>
+
+
+            <span
+                class="section-kicker"
+                id="section-kicker"
+            >
+                LET'S GET STARTED
+            </span>
+
+
+            <h2 id="page-title">
+                Your next step
+                <br>
+                starts here.
+            </h2>
+
+
+            <p
+                class="subtitle"
+                id="page-description"
+            >
+                New here or picking up where you left off?
+                <br>
+                There's a place for you.
+            </p>
+
+
+            <div
+                id="message"
+                class="message"
+                role="status"
+                aria-live="polite"
+                hidden
+            ></div>
+
+
+            <!-- LANDING AUTH CHOICES -->
+
+            <div
+                id="landing-actions"
+                class="landing-actions"
+            >
+
+                <a
+                    href="/register"
+                    class="choice-card primary-choice"
+                >
+
+                    <span class="choice-icon">
+
+                        <svg
+                            class="lp-icon"
+                            aria-hidden="true"
+                        >
+                            <use href="/assets/icons.svg#gift"></use>
+                        </svg>
+
+                    </span>
+
+
+                    <span>
+
+                        <strong>
+                            Register
+                        </strong>
+
+                        <small>
+                            A fresh start for your next big idea
+                        </small>
+
+                    </span>
+
+
+                    <span class="choice-arrow">
+
+                        <svg class="lp-icon">
+                            <use href="/assets/icons.svg#arrow"></use>
+                        </svg>
+
+                    </span>
+
+                </a>
+
+
+                <a
+                    href="/login"
+                    class="choice-card"
+                >
+
+                    <span class="choice-icon">
+
+                        <svg
+                            class="lp-icon"
+                            aria-hidden="true"
+                        >
+                            <use href="/assets/icons.svg#profile"></use>
+                        </svg>
+
+                    </span>
+
+
+                    <span>
+
+                        <strong>
+                            Login
+                        </strong>
+
+                        <small>
+                            Welcome back. Let us keep going.
+                        </small>
+
+                    </span>
+
+
+                    <span class="choice-arrow">
+
+                        <svg class="lp-icon">
+                            <use href="/assets/icons.svg#arrow"></use>
+                        </svg>
+
+                    </span>
+
+                </a>
+
+            </div>
+
+
+
+            <!-- AUTH ACTIONS -->
+
+            <div
+                id="auth-actions"
+                hidden
+            >
+
+                <button
+                    class="google-button"
+                    id="google-button"
+                    type="button"
+                    disabled
+                >
+
+                    <img
+                        src="/assets/google.svg"
+                        alt=""
+                        width="20"
+                        height="20"
+                    >
+
+                    <span>
+                        Continue with Google
+                    </span>
+
+                    <span
+                        class="spinner"
+                        aria-hidden="true"
+                        hidden
+                    ></span>
+
+                </button>
+
+
+                <p
+                    id="register-note"
+                    class="helper"
+                    hidden
+                >
+                    Use your Google account to get started.
+                    Already joined? We'll sign you right in.
+                </p>
+
+
+                <div
+                    id="email-section"
+                    hidden
+                >
+
+                    <div class="divider">
+                        <span>
+                            or use your email
+                        </span>
+                    </div>
+
+
+                    <form id="login-form">
+
+                        <label for="email">
+                            Email address
+                        </label>
+
+
+                        <input
+                            id="email"
+                            name="email"
+                            type="email"
+                            placeholder="you@example.com"
+                            autocomplete="username"
+                            maxlength="254"
+                            required
+                        >
+
+
+                        <div class="label-row">
+
+                            <label for="password">
+                                Password
+                            </label>
+
+                            <a href="/forgot-password">
+                                Forgot password?
+                            </a>
+
+                        </div>
+
+
+                        <div class="password-field">
+
+                            <input
+                                id="password"
+                                name="password"
+                                type="password"
+                                placeholder="Enter your password"
+                                autocomplete="current-password"
+                                required
+                            >
+
+
+                            <button
+                                id="toggle-password"
+                                type="button"
+                                aria-label="Show password"
+                                aria-pressed="false"
+                            >
+                                Show
+                            </button>
+
+                        </div>
+
+
+                        <button
+                            class="primary-button"
+                            id="login-button"
+                            type="submit"
+                            disabled
+                        >
+
+                            <span>
+                                Login
+                            </span>
+
+                            <span class="button-arrow">
+                                →
+                            </span>
+
+                            <span
+                                class="spinner"
+                                aria-hidden="true"
+                                hidden
+                            ></span>
+
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- RESET -->
+
+            <form
+                id="reset-form"
+                hidden
+            >
+
+                <label for="reset-email">
+                    Email address
+                </label>
+
+
+                <input
+                    id="reset-email"
+                    name="email"
+                    type="email"
+                    placeholder="you@example.com"
+                    autocomplete="email"
+                    maxlength="254"
+                    required
+                >
+
+
+                <button
+                    class="primary-button"
+                    id="reset-button"
+                    type="submit"
+                    disabled
+                >
+
+                    <span>
+                        Send reset link
+                    </span>
+
+                    <span class="button-arrow">
+                        →
+                    </span>
+
+                    <span
+                        class="spinner"
+                        aria-hidden="true"
+                        hidden
+                    ></span>
+
+                </button>
+
+
+                <p class="helper">
+                    If you joined with Google, continue with Google
+                    on the login page.
+                </p>
+
             </form>
-          </div>
+
+
+            <p
+                class="switch-page"
+                id="switch-page"
+                hidden
+            ></p>
+
+
+            <div class="privacy-note">
+
+                <svg
+                    width="15"
+                    height="17"
+                    viewBox="0 0 20 22"
+                    fill="none"
+                    aria-hidden="true"
+                >
+
+                    <path
+                        d="M10 1 18 4v6c0 5-4 8-8 11-4-3-8-6-8-11V4l8-3Z"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                    />
+
+                    <path
+                        d="m6 10 3 3 5-6"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                    />
+
+                </svg>
+
+                Secure sign-in. A space that's yours.
+
+            </div>
+
+
+            <noscript>
+
+                <p class="message">
+                    Please enable JavaScript to sign in securely.
+                </p>
+
+            </noscript>
+
         </div>
 
-        <form id="reset-form" hidden>
-          <label for="reset-email">Email address</label>
-          <input id="reset-email" name="email" type="email" placeholder="you@example.com" autocomplete="email" maxlength="254" required>
-          <button class="primary-button" id="reset-button" type="submit" disabled><span>Send reset link</span><span class="button-arrow" aria-hidden="true">â†’</span><span class="spinner" aria-hidden="true" hidden></span></button>
-          <p class="helper">If you joined with Google, continue with Google on the login page.</p>
-        </form>
-        <p class="switch-page" id="switch-page" hidden></p>
-        <div class="privacy-note"><svg width="15" height="17" viewBox="0 0 20 22" fill="none" aria-hidden="true"><path d="M10 1 18 4v6c0 5-4 8-8 11-4-3-8-6-8-11V4l8-3Z" stroke="currentColor" stroke-width="1.5"/><path d="m6 10 3 3 5-6" stroke="currentColor" stroke-width="1.5"/></svg> Secure sign-in. A space that\'s yours.</div>
-        <noscript><p class="message">Please enable JavaScript to sign in securely.</p></noscript>
-      </div>
-      <footer class="panel-footer"><span>BUILT FOR NEW BEGINNINGS</span><span>Launchpad Â© <span id="year">2026</span></span></footer>
+
+        <footer class="panel-footer">
+
+            <span>
+                BUILT FOR NEW BEGINNINGS
+            </span>
+
+            <span>
+                Launchpad ©
+                <span id="year">
+                    2026
+                </span>
+            </span>
+
+        </footer>
+
     </section>
-  </main>
+
+</main>
+
 </body>
 </html>
-
