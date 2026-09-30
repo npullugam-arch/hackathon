@@ -2,6 +2,26 @@ import {request,showMessage} from './api.js';
 import './machines.js';
 import {currentUser} from './session-user.js';
 import {money} from './commerce-ui.js';
+
+const motionQuery=window.matchMedia('(prefers-reduced-motion: reduce)');
+const revealObserver=!motionQuery.matches&&'IntersectionObserver' in window?new IntersectionObserver((entries,observer)=>{
+ entries.forEach(entry=>{if(!entry.isIntersecting)return;entry.target.classList.add('is-visible');observer.unobserve(entry.target);});
+},{threshold:.12,rootMargin:'0px 0px -36px'}):null;
+function registerRevealItems(root=document){
+ const items=[];
+ if(root.matches?.('.feature-card,.activity-stat,.machine-card,#home-products-grid .product-card'))items.push(root);
+ root.querySelectorAll?.('.feature-card,.activity-stat,.machine-card,#home-products-grid .product-card').forEach(item=>items.push(item));
+ items.forEach((item,index)=>{
+  if(item.dataset.revealReady)return;
+  item.dataset.revealReady='true';item.classList.add('dashboard-reveal');
+  item.style.setProperty('--reveal-delay',`${Math.min(index%9,6)*55}ms`);
+  if(revealObserver)revealObserver.observe(item);else item.classList.add('is-visible');
+ });
+}
+document.documentElement.classList.add('dashboard-motion');
+registerRevealItems();
+const dynamicGrids=[document.getElementById('machines-grid'),document.getElementById('home-products-grid')].filter(Boolean);
+dynamicGrids.forEach(grid=>new MutationObserver(()=>registerRevealItems(grid)).observe(grid,{childList:true}));
 async function profile(){try{const user=await currentUser();const name=user.name||user.email?.split('@')[0]||'there';
 document.getElementById('home-name').textContent=`Welcome, ${name}`;
 document.getElementById('home-email').textContent=user.email||'Your personal workspace';

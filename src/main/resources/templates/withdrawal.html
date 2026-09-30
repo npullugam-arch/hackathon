@@ -9,7 +9,9 @@
 <main id="main-content" tabindex="-1" class="catalog-main withdraw-main">
 <a href="/dashboard" class="back-home">&larr; Back to home</a>
 <div class="page-heading"><div><p class="eyebrow">YOUR WINNING CASH</p><h1>Withdraw your earnings.</h1><p class="muted">A clear view of your earnings, bank accounts and withdrawals.</p></div><button id="withdraw-refresh" class="button secondary" type="button">Refresh</button></div>
+<section class="withdraw-important" aria-labelledby="withdraw-important-title"><div class="withdraw-important-icon" aria-hidden="true">!</div><div><p class="eyebrow">PLEASE REVIEW BEFORE REQUESTING</p><h2 id="withdraw-important-title">Important Withdrawal Information</h2><ul><li>Withdrawals normally take 1–3 working days to process.</li><li>No withdrawals are processed on Friday or Saturday.</li><li>Only one withdrawal is allowed per user per day.</li><li>During international high or rush traffic, processing may occasionally take up to 5–7 working days.</li><li>All withdrawal requests are subject to verification and processing checks.</li></ul></div></section>
 <div id="message" class="message" role="status" aria-live="polite" hidden></div>
+<div id="withdraw-weekend" class="withdraw-weekend" role="alert" hidden>Due to international holidays, withdrawals are unavailable on Saturday and Sunday. Withdrawals will be available again on Monday at 12:00 AM.</div>
 <p id="withdraw-loading" role="status">Loading your withdrawal dashboard…</p>
 <section class="withdraw-balances" aria-label="Balances">
 <article class="withdraw-panel"><p>Available Recharge Balance</p><strong id="withdraw-recharge">—</strong><p class="muted">Deposited principal · not withdrawable</p></article>
@@ -19,7 +21,7 @@
 <p class="withdraw-notice">Only eligible Winning Cash can be withdrawn. Recharge money is never included. Processing withdrawals reserve your earnings immediately; failed or rejected requests return that reserved amount to Winning Cash.</p>
 <div class="withdraw-layout">
 <section class="withdraw-panel"><div class="section-heading"><h2>Your bank accounts</h2><button id="add-bank" class="button secondary" type="button" disabled>Add Bank Account</button></div><p id="bank-config" class="muted" hidden>Bank setup is temporarily unavailable. Please contact support.</p><p id="banks-empty">Loading bank accounts…</p><div id="bank-cards" class="bank-cards"></div></section>
-<section class="withdraw-panel"><h2>Request a withdrawal</h2><p id="withdraw-minimum" class="muted">Loading withdrawal minimum…</p>
+<section class="withdraw-panel withdraw-request-panel"><h2>Request a withdrawal</h2><p id="withdraw-minimum" class="muted">Loading withdrawal minimum…</p><div id="withdraw-cooldown" class="withdraw-cooldown" hidden role="status" aria-live="polite"><span class="cooldown-dot" aria-hidden="true"></span><div><strong>Withdrawal cooldown active</strong><p>Next withdrawal available in <span id="withdraw-countdown">—</span></p><small id="withdraw-next-at"></small></div></div>
 <div id="pending-withdrawal" class="withdraw-notice" hidden><p>A previous request needs confirmation. Retry it to recover the same withdrawal without reserving money twice.</p><button id="retry-withdrawal" class="button primary" type="button">Recover previous request</button></div>
 <form id="withdraw-form"><fieldset id="withdraw-fields" disabled><legend class="visually-hidden">Withdrawal details</legend>
 <label for="withdraw-bank">Bank account</label><select id="withdraw-bank" required><option value="">Select a bank account</option></select>
@@ -32,7 +34,6 @@
 </main>
 <dialog id="bank-dialog" class="editor-dialog compact"><form id="bank-form"><div class="dialog-heading"><h2>Add Bank Account</h2><button type="button" class="icon-button" data-close="bank-dialog" aria-label="Close bank form">×</button></div>
 <p id="bank-error" class="message" role="alert" hidden></p><fieldset id="bank-fields"><legend class="visually-hidden">Bank details</legend>
-<label for="bank-search">Find your bank</label><input id="bank-search" type="search" placeholder="Search bank names" autocomplete="off">
 <label for="bank-code">Select bank</label><select id="bank-code" name="bankCode" required><option value="">Select bank</option></select>
 <label for="bank-holder">Account holder name</label><input id="bank-holder" name="holderName" maxlength="160" required autocomplete="name">
 <label for="bank-number">Account number</label><input id="bank-number" name="accountNumber" inputmode="numeric" pattern="[0-9]{9,18}" minlength="9" maxlength="18" required autocomplete="off">

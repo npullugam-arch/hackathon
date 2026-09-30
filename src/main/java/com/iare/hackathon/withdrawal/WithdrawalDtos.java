@@ -43,9 +43,10 @@ public final class WithdrawalDtos {
         public Page(List<Withdrawal> items,int page,int size,long total,long totalPages){this(items,page,size,total,totalPages,new Summary(0,0,0,0));}
     }
     public record Dashboard(String userId, long totalRechargePaise, long totalWinningPaise,
-            long availableWinningPaise, long reservedPaise, boolean bankSetupConfigured, List<BankAccount> bankAccounts,long availableRechargePaise,long minimumAmountPaise) {
-        public Dashboard(String uid,long recharge,long winning,long available,long reserved,boolean configured,List<BankAccount> banks,long balance){this(uid,recharge,winning,available,reserved,configured,banks,balance,1000);}
-        public Dashboard(String userId,long totalRechargePaise,long totalWinningPaise,long availableWinningPaise,long reservedPaise,boolean configured,List<BankAccount> banks){this(userId,totalRechargePaise,totalWinningPaise,availableWinningPaise,reservedPaise,configured,banks,totalRechargePaise);}
+            long availableWinningPaise, long reservedPaise, boolean bankSetupConfigured, List<BankAccount> bankAccounts,long availableRechargePaise,long minimumAmountPaise, Instant nextWithdrawalAt) {
+        public Dashboard(String uid,long recharge,long winning,long available,long reserved,boolean configured,List<BankAccount> banks,long balance){this(uid,recharge,winning,available,reserved,configured,banks,balance,1000,null);}
+        public Dashboard(String uid,long recharge,long winning,long available,long reserved,boolean configured,List<BankAccount> banks,long balance,long minimum){this(uid,recharge,winning,available,reserved,configured,banks,balance,minimum,null);}
+        public Dashboard(String userId,long totalRechargePaise,long totalWinningPaise,long availableWinningPaise,long reservedPaise,boolean configured,List<BankAccount> banks){this(userId,totalRechargePaise,totalWinningPaise,availableWinningPaise,reservedPaise,configured,banks,totalRechargePaise,1000,null);}
         @com.fasterxml.jackson.annotation.JsonProperty public long currentWinningPaise(){return availableWinningPaise+reservedPaise;}
     }
     public record Snapshot(Dashboard dashboard, Page history) {}

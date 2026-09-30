@@ -7,14 +7,15 @@ let claimed = 300000 + Math.floor(Math.random() * 200001);
 let timer = 0;
 let frame = 0;
 let running = true;
+let enteredViewport = false;
 
 function bounded(value, min, max, step) {
   return Math.max(min, Math.min(max, value + Math.floor((Math.random() * 2 - 1) * step)));
 }
 function render(users, profit, duration = 900) {
   cancelAnimationFrame(frame);
-  const fromUsers = Number(byId('activity-users').dataset.value || users);
-  const fromProfit = Number(byId('activity-claims').dataset.value || profit);
+  const fromUsers = Number(byId('activity-users').dataset.value || 0);
+  const fromProfit = Number(byId('activity-claims').dataset.value || 0);
   const started = performance.now();
   const paint = now => {
     const progress = reduced.matches ? 1 : Math.min(1, (now - started) / duration);
@@ -35,7 +36,7 @@ function schedule() {
   timer = window.setTimeout(() => { refresh(); schedule(); }, 5000);
 }
 function refresh() {
-  if (!running || document.hidden) return;
+  if (!running || document.hidden || !enteredViewport) return;
   activeUsers = bounded(activeUsers, 3000, 5000, 180);
   claimed = bounded(claimed, 300000, 500000, 18000);
   render(activeUsers, claimed);
@@ -55,5 +56,8 @@ setDemoCopy();
 byId('activity-retry').addEventListener('click', refresh);
 document.addEventListener('visibilitychange', () => { if (document.hidden) { cancelAnimationFrame(frame); } else { refresh(); schedule(); } });
 window.addEventListener('pagehide', stop, {once:true});
-render(activeUsers, claimed, 0); schedule();
+const panel=document.querySelector('.activity-panel');
+const start=()=>{if(enteredViewport)return;enteredViewport=true;render(activeUsers,claimed,reduced.matches?0:1100);schedule();};
+if(reduced.matches||!('IntersectionObserver' in window))start();
+else new IntersectionObserver((entries,observer)=>{if(entries.some(entry=>entry.isIntersecting)){start();observer.disconnect();}},{threshold:.25}).observe(panel);
 

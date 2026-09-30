@@ -3,6 +3,7 @@ package com.iare.hackathon.withdrawal;
 import static com.iare.hackathon.withdrawal.WithdrawalDtos.*;
 import java.math.BigDecimal;
 import java.util.*;
+import java.time.*;
 import jakarta.validation.Validator;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.http.HttpStatus;
@@ -37,7 +38,17 @@ public class WithdrawalService {
         if (value == null || !validator.validate(value).isEmpty()) throw invalid("Check the amount, bank details and required fields.");
     }
     public List<Bank> directory() { return directory.banks(); }
-    public Dashboard dashboard(String uid) { var d=repository().dashboard(uid,encryption.configured());return new Dashboard(d.userId(),d.totalRechargePaise(),d.totalWinningPaise(),d.availableWinningPaise(),d.reservedPaise(),d.bankSetupConfigured(),d.bankAccounts(),d.availableRechargePaise(),minimumAmountPaise); }
+    private static Instant nextWithdrawalAt(Instant requestedAt) {
+        if (requestedAt == null) return null;
+        var local=requestedAt.atZone(ZoneId.of("Asia/Kolkata")).plusHours(24);
+        while (local.getDayOfWeek()==DayOfWeek.FRIDAY || local.getDayOfWeek()==DayOfWeek.SATURDAY) local=local.plusDays(1);
+        return local.toInstant();
+    }
+    private static boolean withdrawalWeekend() {
+        var day=LocalDate.now(ZoneId.of("Asia/Kolkata")).getDayOfWeek();
+        return day==DayOfWeek.SATURDAY || day==DayOfWeek.SUNDAY;
+    }
+    public Dashboard dashboard(String uid) { var repo=repository(); var d=repo.dashboard(uid,encryption.configured()); var next=repo.latestRequestedAt(uid).map(WithdrawalService::nextWithdrawalAt).filter(t->t.isAfter(Instant.now())).orElse(null); return new Dashboard(d.userId(),d.totalRechargePaise(),d.totalWinningPaise(),d.availableWinningPaise(),d.reservedPaise(),d.bankSetupConfigured(),d.bankAccounts(),d.availableRechargePaise(),minimumAmountPaise,next); }
     public Snapshot snapshot(String uid, Filter filter) {
         return repository().snapshot(() -> new Snapshot(dashboard(uid),list(uid,filter)));
     }
@@ -73,6 +84,9 @@ public class WithdrawalService {
                     throw conflict("This request ID was already used with different withdrawal details.");
                 return previous;
             }
+            if (withdrawalWeekend()) throw conflict("Due to international holidays, withdrawals are unavailable on Saturday and Sunday. Withdrawals will be available again on Monday at 12:00 AM.");
+            var next=repo.latestRequestedAt(uid).map(WithdrawalService::nextWithdrawalAt).orElse(null);
+            if (next != null && next.isAfter(Instant.now())) throw conflict("Your next withdrawal is available after "+next.atZone(ZoneId.of("Asia/Kolkata")).toLocalDateTime()+" (India time).");
             if(paise<minimumAmountPaise)throw invalid("Minimum withdrawal is INR "+BigDecimal.valueOf(minimumAmountPaise,2).toPlainString()+".");
             repo.configureMinimum(minimumAmountPaise);
             if (!repo.bank(uid,request.bankAccountId()).active()) throw invalid("Choose an active bank account.");

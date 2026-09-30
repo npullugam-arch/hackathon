@@ -31,6 +31,10 @@ public class WithdrawalRepository {
         return jdbc.query("SELECT winning_balance_paise FROM public.users WHERE firebase_uid=? FOR UPDATE",
                 (r,n) -> r.getLong(1), uid).stream().findFirst().orElseThrow(WithdrawalService::notFound);
     }
+    public Optional<Instant> latestRequestedAt(String uid) {
+        return jdbc.query("SELECT requested_at FROM app_private.withdrawals WHERE user_id=? ORDER BY requested_at DESC,id DESC LIMIT 1",
+                (r,n) -> r.getTimestamp(1).toInstant(), uid).stream().findFirst();
+    }
     private static BankAccount bank(ResultSet r) throws SQLException {
         return new BankAccount(r.getObject("bank_id", UUID.class), r.getString("bank_code"), r.getString("bank_name"),
                 r.getString("holder_name"), "•••• " + r.getString("account_last_four"), r.getString("ifsc"),
@@ -73,7 +77,7 @@ public class WithdrawalRepository {
                   COALESCE((SELECT SUM(amount_paise) FROM app_private.withdrawals WHERE user_id=u.firebase_uid AND status='PROCESSING'),0) AS reserved
                 FROM public.users u WHERE firebase_uid=?
                 """, (r,n) -> new Dashboard(uid, r.getLong("recharges"), r.getLong("earnings"), r.getLong("winning_balance_paise"),
-                r.getLong("reserved"), configured, banks(uid),r.getLong("wallet_balance_paise")), uid).stream().findFirst().orElseThrow(WithdrawalService::notFound);
+                r.getLong("reserved"), configured, banks(uid),r.getLong("wallet_balance_paise"),1000,null), uid).stream().findFirst().orElseThrow(WithdrawalService::notFound);
     }
     private static Instant instant(ResultSet r, String field) throws SQLException {
         var value = r.getTimestamp(field); return value == null ? null : value.toInstant();

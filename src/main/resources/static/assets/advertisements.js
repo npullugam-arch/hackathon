@@ -1,6 +1,7 @@
 ﻿import {request} from './api.js';
 import {element} from './catalog-ui.js';
-const dialog=element('dialog','ad-modal'), heading=element('header'), title=element('h2'), close=element('button','icon-button','Ã—');
+if(!document.querySelector('link[href=\"/assets/advertisements.css\"]')){const style=document.createElement('link');style.rel='stylesheet';style.href='/assets/advertisements.css';document.head.append(style);}
+const dialog=element('dialog','ad-modal'), heading=element('header'), title=element('h2'), close=element('button','icon-button'), media=element('div','ad-media');
 dialog.setAttribute('aria-label','Announcement');close.type='button';close.setAttribute('aria-label','Close advertisement');heading.append(title,close);
 const picture=element('img');picture.referrerPolicy='no-referrer';const notice=element('p','ad-notice','This advertisement image could not be loaded.');notice.hidden=true;
 media.append(picture);dialog.append(heading,media,notice);document.body.append(dialog);

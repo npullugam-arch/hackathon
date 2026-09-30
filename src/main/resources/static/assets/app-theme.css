@@ -25,6 +25,35 @@ body.lp-app{background:#f5f6fa;color:#232539;font-family:Inter,"Segoe UI",Arial,
 @media(max-width:767px){.feature-card{order:5}.feature-card:nth-child(4){order:0}.feature-card:nth-child(3){order:1}.feature-card:nth-child(5){order:2}.feature-card:nth-child(7){order:3}.lp-app .spin-wheel-shell{max-width:300px}.lp-app .spin-stage{padding:18px}.lp-app .information-card{max-width:100%}}
 
 .lp-app .product-actions{display:flex;gap:8px;width:100%}.lp-app .product-actions .button{flex:1;min-width:0}.lp-app .history-scroll{overflow-x:hidden}.lp-app .history-scroll table{width:100%;min-width:0;table-layout:fixed}.lp-app .history-scroll th,.lp-app .history-scroll td{overflow:hidden;text-overflow:ellipsis}
+
+/* Dashboard motion and surface polish */
+.dashboard-motion .dashboard-reveal{opacity:0;transform:translateY(18px) scale(.985);transition:opacity .48s cubic-bezier(.22,1,.36,1) var(--reveal-delay,0ms),transform .48s cubic-bezier(.22,1,.36,1) var(--reveal-delay,0ms)}
+.dashboard-motion .dashboard-reveal.is-visible{opacity:1;transform:none}
+.dashboard-motion .lp-app .feature-card{position:relative;isolation:isolate;overflow:hidden;border-color:#e4e2eb;box-shadow:0 4px 16px #25203a08;transition:transform .25s cubic-bezier(.2,.8,.2,1),border-color .25s,box-shadow .25s,background-color .25s}
+.dashboard-motion .lp-app .feature-card::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(120deg,#f4effa00 35%,#f4effa 100%);opacity:0;transition:opacity .25s}
+.dashboard-motion .lp-app .feature-icon{transition:transform .28s cubic-bezier(.2,.8,.2,1),background-color .25s,color .25s;box-shadow:inset 0 0 0 1px #ffffff80}
+.dashboard-motion .lp-app .feature-arrow{transition:transform .25s,color .25s}
+.dashboard-motion .lp-app .feature-card:hover{transform:translateY(-4px) scale(1.012);border-color:#cfc2df;box-shadow:0 14px 30px #2e24451a}
+.dashboard-motion .lp-app .feature-card:hover::after{opacity:1}.dashboard-motion .lp-app .feature-card:hover .feature-icon{transform:translateY(-2px) rotate(-4deg) scale(1.08);background:#e9e0f3;color:#654a82}.dashboard-motion .lp-app .feature-card:hover .feature-arrow{transform:translateX(4px);color:#72568e}
+.dashboard-motion .lp-app .activity-panel{position:relative;overflow:hidden;background:linear-gradient(135deg,#fff 0%,#fbf9fd 52%,#f5f0f9 100%);border-color:#e4ddec;box-shadow:0 12px 38px #30223f0b}
+.dashboard-motion .lp-app .activity-panel::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;right:-120px;top:-150px;background:radial-gradient(circle,#d8c7e833,transparent 68%);pointer-events:none}
+.dashboard-motion .lp-app .activity-stat{position:relative;overflow:hidden;background:#ffffffd9;border-color:#e8e2ed;box-shadow:0 5px 18px #29203b08;transition:transform .25s cubic-bezier(.2,.8,.2,1),box-shadow .25s,border-color .25s}
+.dashboard-motion .lp-app .activity-stat::after{content:"";position:absolute;inset:auto -30% -80% 35%;height:130px;background:radial-gradient(ellipse,#8868a21a,transparent 67%);transition:transform .35s,opacity .35s;opacity:.5}
+.dashboard-motion .lp-app .activity-stat:hover{transform:translateY(-4px) scale(1.01);border-color:#d7c9e2;box-shadow:0 15px 35px #36254717}.dashboard-motion .lp-app .activity-stat:hover::after{transform:translateY(-15px);opacity:1}
+.dashboard-motion .lp-app .activity-number{font-family:"Avenir Next","Segoe UI Variable","Segoe UI",sans-serif;font-weight:760;letter-spacing:-1.2px;background:linear-gradient(110deg,#30253d,#76558d);background-clip:text;-webkit-background-clip:text;color:transparent}
+.dashboard-motion .lp-app .activity-symbol{transition:transform .28s cubic-bezier(.2,.8,.2,1),box-shadow .25s}.dashboard-motion .lp-app .activity-stat:hover .activity-symbol{transform:rotate(-5deg) scale(1.08);box-shadow:0 7px 17px #5c417522}
+.dashboard-motion .lp-app .product-card{position:relative;border-color:#e3e3ea;box-shadow:0 7px 22px #1e20330a;transition:transform .28s cubic-bezier(.2,.8,.2,1),box-shadow .28s,border-color .28s}
+.dashboard-motion .lp-app .product-card:hover{transform:translateY(-6px);border-color:#cec7d9;box-shadow:0 20px 42px #25203918}
+.dashboard-motion .lp-app .product-card .product-visual,.dashboard-motion .lp-app .machine-card{overflow:hidden}.dashboard-motion .lp-app .product-card .product-image{transition:transform .55s cubic-bezier(.2,.8,.2,1),filter .4s}
+.dashboard-motion .lp-app .product-card:hover .product-image{transform:scale(1.045);filter:saturate(1.06) contrast(1.02)}
+.dashboard-motion .lp-app .product-card .card-body{background:linear-gradient(180deg,#fff,#fdfcfe)}
+.dashboard-motion .lp-app .product-card .card-top h3{font-family:"Avenir Next","Segoe UI Variable","Segoe UI",sans-serif;font-weight:700;letter-spacing:-.25px}
+.dashboard-motion .lp-app .product-card .price{font-family:"Avenir Next","Segoe UI Variable","Segoe UI",sans-serif;font-weight:750;color:#30263c}
+.dashboard-motion .lp-app .product-card .status-pill{box-shadow:inset 0 0 0 1px #ffffff8c;font-weight:750;letter-spacing:.5px}
+.dashboard-motion .lp-app .machine-card::before{content:"TASK BONUS";position:absolute;z-index:2;top:12px;left:12px;padding:6px 9px;border-radius:7px;background:#29263fe6;color:#fff;font-size:8px;font-weight:800;letter-spacing:1.2px;box-shadow:0 5px 14px #1d182c2b}
+.dashboard-motion .lp-app .machine-card:nth-child(2)::before{background:#866739e8}.dashboard-motion .lp-app .machine-card .button{border-color:#d7cbe1;background:#f8f4fb;color:#5e4773;transition:background .2s,color .2s,transform .2s,box-shadow .2s}.dashboard-motion .lp-app .machine-card:hover .button{background:#66507b;color:#fff;border-color:#66507b;box-shadow:0 7px 16px #4b385d24}
+@media(hover:none){.dashboard-motion .lp-app .feature-card:hover,.dashboard-motion .lp-app .activity-stat:hover,.dashboard-motion .lp-app .product-card:hover{transform:none}.dashboard-motion .lp-app .product-card:hover .product-image{transform:none}}
+@media(prefers-reduced-motion:reduce){.dashboard-motion .dashboard-reveal{opacity:1;transform:none}.dashboard-motion .lp-app .feature-card,.dashboard-motion .lp-app .feature-icon,.dashboard-motion .lp-app .feature-arrow,.dashboard-motion .lp-app .activity-stat,.dashboard-motion .lp-app .activity-symbol,.dashboard-motion .lp-app .product-card,.dashboard-motion .lp-app .product-card .product-image{transition:none!important}.dashboard-motion .lp-app .feature-card:hover,.dashboard-motion .lp-app .activity-stat:hover,.dashboard-motion .lp-app .product-card:hover{transform:none}.dashboard-motion .lp-app .product-card:hover .product-image{transform:none}}
 @media(max-width:767px){.lp-app .product-actions{gap:6px}.lp-app .product-actions .button{font-size:10px;padding:8px 5px}.lp-app .team-tree{overflow-x:hidden}.lp-app .team-member{width:100%;min-width:0;box-sizing:border-box}.lp-app .team-list{padding-left:10px}.lp-app .team-list>.team-list{margin-left:4px}}
 /* Supplied Launchpad logo: preserve the image as one complete wordmark. */
 .launchpad-logo,.brand-logo,.footer-logo{display:block;width:auto;height:auto;max-width:100%;object-fit:contain}

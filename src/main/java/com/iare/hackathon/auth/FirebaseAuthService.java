@@ -11,6 +11,8 @@ import com.google.firebase.auth.SessionCookieOptions;
 import com.google.firebase.auth.UserRecord;
 import jakarta.annotation.PreDestroy;
 import java.io.IOException;
+import java.io.ByteArrayInputStream;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.Instant;
@@ -29,7 +31,10 @@ public class FirebaseAuthService {
         this.properties = properties;
         if (!properties.enabled()) { app = null; auth = null; return; }
         GoogleCredentials credentials;
-        if (properties.serviceAccountPath() == null || properties.serviceAccountPath().isBlank()) {
+        if (properties.serviceAccountJson() != null && !properties.serviceAccountJson().isBlank()) {
+            credentials = GoogleCredentials.fromStream(new ByteArrayInputStream(
+                    properties.serviceAccountJson().replace("\\n", "\n").getBytes(StandardCharsets.UTF_8)));
+        } else if (properties.serviceAccountPath() == null || properties.serviceAccountPath().isBlank()) {
             credentials = GoogleCredentials.getApplicationDefault();
         } else {
             try (var input = Files.newInputStream(Path.of(properties.serviceAccountPath()))) {

@@ -3,12 +3,13 @@ import {request,post,showMessage} from './api.js';
 import {confirmAction} from './confirm-modal.js';
 import {money,element,detail,historyRow} from './withdrawal-ui.js';
 const $=id=>document.getElementById(id);
-let dashboard, directory=[], page=0, pages=0, busy=false, loading=false, pending=null, storageKey, draft;
+let dashboard, directory=[], page=0, pages=0, busy=false, loading=false, pending=null, storageKey, draft, cooldownTimer;
 const form=$('withdraw-form'), bankForm=$('bank-form');
 function error(id,text=''){ $(id).textContent=text; $(id).hidden=!text; }
 function failure(ex){ if(ex.status===401) location.replace('/login'); else showMessage(ex.message); }
 function controls(){
-  $('withdraw-fields').disabled=busy || !dashboard || !dashboard.bankAccounts.length || !!pending;
+  const weekend=withdrawalWeekend(); $('withdraw-weekend').hidden=!weekend;
+  $('withdraw-fields').disabled=busy || !dashboard || !dashboard.bankAccounts.length || !!pending || withdrawalCooldown() || weekend;
   $('add-bank').disabled=busy || !dashboard?.bankSetupConfigured;
   $('withdraw-refresh').disabled=busy || loading;
   $('withdraw-previous').disabled=loading || busy || page===0;
@@ -49,18 +50,20 @@ async function load(){
     $('withdraw-recharge').textContent=money(data.availableRechargePaise);$('withdraw-earned').textContent=money(data.currentWinningPaise);$('withdraw-available').textContent=money(data.availableWinningPaise);$('withdraw-reserved').textContent=money(data.reservedPaise)+' reserved in processing requests';
     $('bank-config').hidden=data.bankSetupConfigured;if(banksChanged)renderBanks();remaining();
     pages=history.totalPages;page=history.page;$('withdraw-history').replaceChildren(...history.items.map(historyRow));$('withdraw-history-empty').hidden=history.items.length>0;$('withdraw-history-empty').textContent='No withdrawals yet. Your requests will appear here.';$('withdraw-page').textContent=pages ? `Page ${page+1} of ${pages}` : 'No requests';
-  }catch(ex){failure(ex);}finally{loading=false;$('withdraw-loading').hidden=true;controls();}
+  }catch(ex){failure(ex);}finally{loading=false;$('withdraw-loading').hidden=true;renderCooldown();controls();}
 }
 function bankOptions(){
-  const selected=$('bank-code').value, search=$('bank-search').value.trim().toLowerCase();
-  $('bank-code').replaceChildren(new Option('Select bank',''),...directory.filter(b=>b.name.toLowerCase().includes(search)||b.code.toLowerCase().includes(search)||b.code===selected).map(b=>new Option(b.name,b.code)));
+  const selected=$('bank-code').value;
+  $('bank-code').replaceChildren(new Option('Select bank',''),...directory.map(b=>new Option(b.name,b.code)));
   $('bank-code').value=selected;
 }
+function withdrawalWeekend(){const day=new Intl.DateTimeFormat('en-US',{timeZone:'Asia/Kolkata',weekday:'short'}).format(new Date());return day==='Sat'||day==='Sun';}
+function withdrawalCooldown(){return !!dashboard?.nextWithdrawalAt && Date.parse(dashboard.nextWithdrawalAt)>Date.now();}
+function renderCooldown(){const box=$('withdraw-cooldown');if(!box)return;const next=dashboard?.nextWithdrawalAt?Date.parse(dashboard.nextWithdrawalAt):NaN;const active=Number.isFinite(next)&&next>Date.now();box.hidden=!active;if(active){let seconds=Math.max(0,Math.ceil((next-Date.now())/1000));const hours=Math.floor(seconds/3600);seconds%=3600;const minutes=Math.floor(seconds/60);const secs=seconds%60;$('withdraw-countdown').textContent=`${hours}h ${String(minutes).padStart(2,'0')}m ${String(secs).padStart(2,'0')}s`;$('withdraw-next-at').textContent='Available '+new Date(next).toLocaleString(undefined,{dateStyle:'medium',timeStyle:'short'});}}
 $('add-bank').addEventListener('click',async()=>{
   bankForm.reset();error('bank-error');$('bank-dialog').showModal();
   try{if(!directory.length)directory=await request('/api/withdrawals/banks');bankOptions();}catch(ex){error('bank-error',ex.message);}
 });
-$('bank-search').addEventListener('input',bankOptions);
 $('bank-ifsc').addEventListener('input',()=>{$('bank-ifsc').value=$('bank-ifsc').value.toUpperCase();});
 for(const button of document.querySelectorAll('[data-close]'))button.addEventListener('click',()=>{if(!busy)$(button.dataset.close).close();});
 $('bank-dialog').addEventListener('close',()=>bankForm.reset());
@@ -75,7 +78,7 @@ bankForm.addEventListener('submit',async event=>{
   try{await post('/api/withdrawals/bank-accounts',data);$('bank-dialog').close();await load();showMessage('Bank account saved.','success');}catch(ex){error('bank-error',ex.message);}finally{busy=false;controls();}
 });
 form.addEventListener('submit',event=>{
-  event.preventDefault();if(busy || pending || !dashboard)return;const amount=parseAmount();const bank=dashboard.bankAccounts.find(b=>b.id===$('withdraw-bank').value);
+  event.preventDefault();if(busy || pending || !dashboard)return;if(withdrawalWeekend()){controls();return showMessage('Withdrawals are unavailable on Saturday and Sunday. They will be available again Monday at 12:00 AM.');}if(withdrawalCooldown()){renderCooldown();return showMessage('Your withdrawal cooldown is still active. Please try again when the timer ends.');}const amount=parseAmount();const bank=dashboard.bankAccounts.find(b=>b.id===$('withdraw-bank').value);
   if(!bank || amount===null || amount<dashboard.minimumAmountPaise || amount>dashboard.availableWinningPaise)return showMessage('Select a bank and enter at least '+money(dashboard.minimumAmountPaise)+', within your available Winning Cash.');
   draft={bankAccountId:bank.id,amount:$('withdraw-amount').value,idempotencyKey:crypto.randomUUID()};
   $('withdraw-confirm-details').replaceChildren();for(const [label,value] of [['Withdrawal amount',money(amount)],['Bank',bank.bankName],['Account',bank.maskedAccountNumber],['Account holder',bank.holderName],['Remaining Winning Cash',money(dashboard.availableWinningPaise-amount)],['Expected status','Processing']])detail($('withdraw-confirm-details'),label,value);
@@ -102,7 +105,7 @@ $('withdraw-amount').addEventListener('input',remaining);$('withdraw-refresh').a
 $('withdraw-previous').addEventListener('click',()=>{if(page>0){page--;load();}});$('withdraw-next').addEventListener('click',()=>{if(page+1<pages){page++;load();}});
 window.addEventListener('pageshow',event=>{if(event.persisted)load();});window.addEventListener('storage',event=>{if(event.key===storageKey){readPending();controls();}});
 document.addEventListener('visibilitychange',()=>{if(!document.hidden && !busy)load();});
-setInterval(()=>{if(!document.hidden && !busy && !$('bank-dialog').open && !$('withdraw-confirm').open)load();},30000);
+setInterval(()=>{if(!document.hidden && !busy && !$('bank-dialog').open && !$('withdraw-confirm').open)load();},30000);cooldownTimer=setInterval(renderCooldown,1000);
 load();
 
 watchWithdrawals(load, () => busy || loading);

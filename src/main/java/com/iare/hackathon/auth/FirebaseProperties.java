@@ -6,7 +6,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties("app.firebase")
 public record FirebaseProperties(boolean enabled, String apiKey, String authDomain,
         String projectId, String appId, String messagingSenderId, String storageBucket,
-        String serviceAccountPath, Duration sessionDuration, boolean secureCookie) {
+        String serviceAccountPath, String serviceAccountJson, Duration sessionDuration, boolean secureCookie) {
     public FirebaseProperties {
         if (sessionDuration == null) sessionDuration = Duration.ofDays(5);
         if (sessionDuration.compareTo(Duration.ofMinutes(5)) < 0 || sessionDuration.compareTo(Duration.ofDays(14)) > 0)
