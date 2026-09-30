@@ -22,7 +22,7 @@ async function refresh() {
   byId('wallet-balance').textContent = money(wallet.balancePaise);
   byId('recharge-amount').max = wallet.maxAmount;
   byId('amount-help').textContent = wallet.rechargeEnabled
-    ? `Choose ₹1 to ${money(Number(wallet.maxAmount) * 100)}, with up to two decimal places.`
+    ? `Choose ₹100 to ${money(Number(wallet.maxAmount) * 100)}, with up to two decimal places.`
     : 'Recharges are not configured yet. Please try again later.';
   const rows = byId('history-rows');
   rows.replaceChildren();

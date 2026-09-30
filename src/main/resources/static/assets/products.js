@@ -3,10 +3,11 @@ import {element, image, prices, stats, productCard} from './catalog-ui.js';
 import {buyProduct} from './purchase-checkout.js';
 import './advertisements.js';
 const $=id=>document.getElementById(id);
+const byDiscount=(a,b)=>Number(a.discountPrice??a.discount_price??0)-Number(b.discountPrice??b.discount_price??0);
 async function load() {
  try {
   const id=location.pathname.split('/')[2];
-  if(!id){const result=await request('/api/products');$('products-grid').replaceChildren(...result.items.map(p=>productCard(p,false,result.purchases?.[p.id]).card));$('catalog-empty').hidden=result.items.length>0;}
+   if(!id){const result=await request('/api/products');const items=[...result.items].sort(byDiscount);$('products-grid').replaceChildren(...items.map(p=>productCard(p,false,result.purchases?.[p.id]).card));$('catalog-empty').hidden=items.length>0;}
   else {
    $('page-heading').hidden=true;$('back-products').hidden=false;
    const result=await request('/api/products/'+encodeURIComponent(id)); const p=result.product;

@@ -30,8 +30,8 @@ public class WalletService {
         return new Wallet(repository.balance(uid), "INR", properties.configured(), properties.maxAmount, repository.history(uid));
     }
     long paise(BigDecimal amount) {
-        if (amount == null || amount.compareTo(BigDecimal.ONE) < 0 || amount.compareTo(properties.maxAmount) > 0)
-            throw WalletException.invalid("Enter an amount between INR 1 and INR " + properties.maxAmount.toPlainString() + ".");
+        if (amount == null || amount.compareTo(BigDecimal.valueOf(100)) < 0 || amount.compareTo(properties.maxAmount) > 0)
+            throw WalletException.invalid("Enter an amount between INR 100 and INR " + properties.maxAmount.toPlainString() + ".");
         try { return amount.movePointRight(2).longValueExact(); }
         catch (ArithmeticException ex) { throw WalletException.invalid("The amount must have no more than two decimal places."); }
     }
