@@ -5,7 +5,7 @@ export function element(tag, className, text) {
 }
 export const money = value => new Intl.NumberFormat('en-IN', {style:'currency', currency:'INR', maximumFractionDigits:2}).format(Number(value));
 export function image(url, title, className) {
-  const img = element('img', className); img.alt = title; img.loading = 'lazy'; img.referrerPolicy = 'no-referrer';
+  const img = element('img', className); img.alt = title; img.loading = 'lazy'; img.referrerPolicy = 'no-referrer'; img.draggable = false; img.addEventListener('contextmenu', event => event.preventDefault()); img.addEventListener('dragstart', event => event.preventDefault());
   img.addEventListener('error', () => img.replaceWith(element('div', 'image-placeholder', 'Image unavailable')), {once:true});
   img.src = url; return img;
 }

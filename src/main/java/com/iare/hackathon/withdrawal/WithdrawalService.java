@@ -132,14 +132,27 @@ public class WithdrawalService {
             case "CANCELLED", "REFUNDED" -> "REJECTED"; default -> status; };
     }
     public AdminWithdrawal adminDetail(UUID id, String actor) {
-        return repository().transaction(() -> new AdminWithdrawal(detail(null,id),payoutDetails(id,actor).accountNumber()));
+        var withdrawal = detail(null,id);
+        try {
+            return new AdminWithdrawal(withdrawal,payoutDetails(id,actor).accountNumber());
+        } catch (ResponseStatusException ex) {
+            // A missing legacy encryption key must not prevent admins from
+            // reviewing or processing the request. Keep the account masked.
+            return new AdminWithdrawal(withdrawal,withdrawal.bankAccount().maskedAccountNumber());
+        }
     }
     public AdminPage adminList(Filter filter, String actor) {
-        return repository().transaction(() -> {
-            var page=list(null,filter);
-            var items=page.items().stream().map(w -> new AdminWithdrawal(w,payoutDetails(w.id(),actor).accountNumber())).toList();
-            return new AdminPage(items,page.page(),page.size(),page.total(),page.totalPages(),page.summary());
-        });
+        var page=list(null,filter);
+        var items=page.items().stream().map(w -> {
+            try {
+                return new AdminWithdrawal(w,payoutDetails(w.id(),actor).accountNumber());
+            } catch (ResponseStatusException ex) {
+                // Keep the admin queue usable when legacy ciphertext cannot be
+                // decrypted; never expose plaintext, show only the stored suffix.
+                return new AdminWithdrawal(w,w.bankAccount().maskedAccountNumber());
+            }
+        }).toList();
+        return new AdminPage(items,page.page(),page.size(),page.total(),page.totalPages(),page.summary());
     }
     public PayoutDetails payoutDetails(UUID id, String actor) {
         var repo=repository();

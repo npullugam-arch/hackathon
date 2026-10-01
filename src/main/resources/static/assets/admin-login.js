@@ -7,7 +7,7 @@ form.addEventListener('submit', async event => {
   const button = document.getElementById('sign-in'); button.disabled = true; button.textContent = 'Signing in…'; showMessage('');
   try {
     await adminWrite('/api/admin/login', {email: form.email.value.trim(), password: form.password.value}, 'POST', true);
-    location.replace('/admin/dashboard');
+    location.replace('/admin-nanda/dashboard');
   } catch (error) { showMessage(error.message); busy = false; button.disabled = false; button.textContent = 'Sign in to admin →'; }
 });
 window.addEventListener('pageshow', event => { if (event.persisted) location.reload(); });
