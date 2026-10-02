@@ -38,10 +38,10 @@ public class WithdrawalService {
         if (value == null || !validator.validate(value).isEmpty()) throw invalid("Check the amount, bank details and required fields.");
     }
     public List<Bank> directory() { return directory.banks(); }
-    private static Instant nextWithdrawalAt(Instant requestedAt) {
+    static Instant nextWithdrawalAt(Instant requestedAt) {
         if (requestedAt == null) return null;
         var local=requestedAt.atZone(ZoneId.of("Asia/Kolkata")).plusHours(24);
-        while (local.getDayOfWeek()==DayOfWeek.FRIDAY || local.getDayOfWeek()==DayOfWeek.SATURDAY) local=local.plusDays(1);
+        while (local.getDayOfWeek()==DayOfWeek.SATURDAY || local.getDayOfWeek()==DayOfWeek.SUNDAY) local=local.plusDays(1);
         return local.toInstant();
     }
     private static boolean withdrawalWeekend() {

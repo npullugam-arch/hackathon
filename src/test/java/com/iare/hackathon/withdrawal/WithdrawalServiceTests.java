@@ -9,6 +9,7 @@ import jakarta.validation.Validation;
 import jakarta.validation.ValidatorFactory;
 import java.math.BigDecimal;
 import java.security.SecureRandom;
+import java.time.*;
 import java.util.*;
 import java.util.concurrent.*;
 import org.flywaydb.core.Flyway;
@@ -48,6 +49,15 @@ class WithdrawalServiceTests {
     long balance(){return service.dashboard("alice").availableWinningPaise();}
     int count(String table){return jdbc.queryForObject("SELECT count(*) FROM app_private."+table,Integer.class);}
     Action action(String status){return new Action(status,status.equals("SUCCESSFUL")?"BANK-REF-001":null,"Reviewed",Set.of("FAILED","REJECTED").contains(status)?"Transfer did not succeed":null);}
+
+    @Test void withdrawalCooldownAllowsFridayAndSkipsOnlyTheWeekend(){
+        var india=ZoneId.of("Asia/Kolkata");
+        var thursday=ZonedDateTime.of(2026,10,1,10,0,0,0,india).toInstant();
+        var friday=ZonedDateTime.of(2026,10,2,10,0,0,0,india).toInstant();
+
+        assertEquals(ZonedDateTime.of(2026,10,2,10,0,0,0,india).toInstant(),WithdrawalService.nextWithdrawalAt(thursday));
+        assertEquals(ZonedDateTime.of(2026,10,5,10,0,0,0,india).toInstant(),WithdrawalService.nextWithdrawalAt(friday));
+    }
 
     @Test void zeroWinningCashCannotWithdrawRechargePrincipal(){
         assertEquals(0,balance());assertThrows(ResponseStatusException.class,()->service.create("alice",request("100")));
